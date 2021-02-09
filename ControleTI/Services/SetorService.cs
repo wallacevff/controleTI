@@ -19,9 +19,25 @@ namespace ControleTI.Services
             _context = context;
         }
 
-        public async Task<List<Setor>> ListarTodos()
+        public async Task<List<Setor>> FindAllAsync()
         {
             return await _context.Setor.ToListAsync();
+        }
+
+        public async Task UpdateAsync(Setor setor)
+        {
+            bool temAlgum = await _context.Setor.AnyAsync(x => x.Id == setor.Id);
+            if (!temAlgum)
+            {
+                return;
+            }
+            _context.Update(setor);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Setor> FindById(int id)
+        {
+            return await _context.Setor.FirstOrDefaultAsync(x => x.Id == id);
         }
 
     }

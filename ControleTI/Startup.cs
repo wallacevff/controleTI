@@ -41,10 +41,11 @@ namespace ControleTI
                     builder.MigrationsAssembly("ControleTI")));
 
             services.AddScoped<ControleTI.Services.SetorService>();
+            services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seed)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +67,8 @@ namespace ControleTI
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            seed.Seed();
         }
     }
 }

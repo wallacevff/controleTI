@@ -21,7 +21,14 @@ namespace ControleTI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _setorService.ListarTodos());
+            return View(await _setorService.FindAllAsync());
+        }
+
+        public async Task<IActionResult> Editar(int? id)
+        {
+          
+            var setor = await _setorService.FindById(id.Value);
+            return View(setor);
         }
     }
 }
