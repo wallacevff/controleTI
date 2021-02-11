@@ -35,9 +35,21 @@ namespace ControleTI.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Setor> FindById(int id)
+        public async Task<Setor> FindByIdAsync(int id)
         {
             return await _context.Setor.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task CriarAssync(Setor setor)
+        {
+            await _context.Setor.AddAsync(setor);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(Setor setor)
+        {
+            _context.Setor.Remove(setor);
+            await _context.SaveChangesAsync();
         }
 
     }

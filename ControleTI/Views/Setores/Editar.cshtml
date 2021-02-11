@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Editar">
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Id" class="control-label">ID: @Model.Id.ToString("D2")</label><br />
@@ -16,6 +16,8 @@
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+            <input type="submit" class="btn btn-success" asp-action="Editar" />
+            <a asp-action="Index" class="btn btn-danger">Cancelar</a>
         </form>
     </div>
 </div>
