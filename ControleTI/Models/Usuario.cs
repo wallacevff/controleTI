@@ -11,8 +11,8 @@ namespace ControleTI.Models
         public string NomeUsu { get; set; }
         public string NomeCompleto { get; set; }
         public Filial Filial { get; set; }
-        //public int FilialId { get; set; }
-        //public int SetorId { get; set; }
+        public int FilialId { get; set; }
+        public int SetorId { get; set; }
         public Setor Setor { get; set; }
         public List<Dispositivo> Dispositivo { get; set; }
 

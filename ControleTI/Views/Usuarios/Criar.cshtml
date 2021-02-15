@@ -1,0 +1,26 @@
+﻿@model ControleTI.Models.VewModels.UsuarioViewModel
+@{
+    ViewData["Title"] = "Novo Usuário";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Criar">
+            <div class="form-group">
+                <label asp-for="Usuario.NomeUsu" class="control-label"></label>
+                <input asp-for="Usuario.NomeUsu" class="form-control" />
+                <label asp-for="Usuario.NomeCompleto" class="control-label"></label>
+                <input asp-for="Usuario.NomeCompleto" class="form-control" />
+                <label asp-for="Usuario.Setor" class="control-label"></label>
+                <select asp-for="Usuario.SetorId" asp-items="@(new SelectList(Model.Setores,"Id","Nome"))" class="form-control"></select>
+                <label asp-for="Usuario.Filial" class="control-label"></label>
+                <select asp-for="Usuario.FilialId" asp-items="@(new SelectList(Model.Filiais,"Id","Nome"))" class="form-control"></select>
+            </div>
+            <input type="submit" class="btn btn-success" asp-action="Criar" />
+            <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+        </form>
+    </div>
+</div>
+

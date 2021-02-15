@@ -9,7 +9,7 @@ namespace ControleTI.Models.VewModels
     public class UsuarioViewModel
     {
         public Usuario Usuario { set; get; }
-        public Setor Setor { get; set; }
-        public Filial Filial { get; set; }
+        public List<Setor> Setores { get; set; }
+        public List<Filial> Filiais { get; set; }
     }
 }

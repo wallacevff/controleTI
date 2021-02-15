@@ -21,5 +21,11 @@ namespace ControleTI.Services
         {
             return await _context.Usuario.Include(obj => obj.Setor).OrderBy(x => x.NomeUsu).ToListAsync();
         }
+
+        public async Task Insert(Usuario usuario)
+        {
+            _context.Usuario.Add(usuario);
+            await _context.SaveChangesAsync();
+        }
     }
 }
