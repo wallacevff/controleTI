@@ -22,5 +22,25 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
     </dl>
-        <a asp-action="index" class="btn btn-primary">Voltar</a>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="success">
+                <th>
+                    Usuários
+                </th>
+           
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Usuarios)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(usu => item.NomeUsu)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="index" class="btn btn-primary">Voltar</a>
 </div>

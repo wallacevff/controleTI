@@ -16,5 +16,6 @@ namespace ControleTI.Data
 
         public DbSet<ControleTI.Models.Filial> Filial { get; set; }
         public DbSet<ControleTI.Models.Setor> Setor { get; set; }
+        public DbSet<ControleTI.Models.Usuario> Usuario { get; set; }
     }
 }

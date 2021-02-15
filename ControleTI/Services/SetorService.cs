@@ -37,7 +37,7 @@ namespace ControleTI.Services
 
         public async Task<Setor> FindByIdAsync(int id)
         {
-            return await _context.Setor.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Setor.Include(obj => obj.Usuarios).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task CriarAssync(Setor setor)

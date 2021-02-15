@@ -33,6 +33,7 @@ namespace ControleTI.Data
             Setor s8 = new Setor(8, "Contabilidade");
             Setor s9 = new Setor(9, "Departamento Pessoal");
             Setor s10 = new Setor(10, "Técnologia da Informação");
+            Setor s11 = new Setor(11, "Programação Técnica");
 
             Filial f1 = new Filial(1, "Matriz");
             Filial f2 = new Filial(2, "Rio das Ostras");
@@ -41,8 +42,16 @@ namespace ControleTI.Data
             Filial f5 = new Filial(5, "São Luiz");
             Filial f6 = new Filial(6, "Manaus");
 
-            _context.Setor.AddRange(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
+            Usuario u1 = new Usuario(1, "wallace.vidal", "Wallace Vidal de Figueiredo Fortuna", f1, s10);
+            Usuario u2 = new Usuario(2, "sara.lisboa", "Sara Lisboa Dias", f1, s3);
+            Usuario u3 = new Usuario(3, "erica.santos", "Erica Santos", f1, s1);
+            Usuario u4 = new Usuario(4, "jardel.leite", "Francisco Jardel Leite", f1, s10);
+            Usuario u5 = new Usuario(5, "lais.veiga", "Lais Canella Veiga", f1, s7);
+            Usuario u6 = new Usuario(6, "eldine.oliveira", "Eldine Sanches Oliveira", f4, s11);
+
+            _context.Setor.AddRange(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11);
             _context.Filial.AddRange(f1, f2, f3, f4, f5, f6);
+            _context.Usuario.AddRange(u1, u2, u3, u4, u5, u6);
             _context.SaveChanges();
         }
     }

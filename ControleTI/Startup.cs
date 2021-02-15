@@ -41,6 +41,7 @@ namespace ControleTI
                     builder.MigrationsAssembly("ControleTI")));
 
             services.AddScoped<ControleTI.Services.SetorService>();
+            services.AddScoped<ControleTI.Services.UsuarioService>();
             services.AddScoped<SeedingService>();
         }
 

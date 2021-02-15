@@ -3,14 +3,16 @@ using System;
 using ControleTI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ControleTI.Migrations
 {
     [DbContext(typeof(ControleTIContext))]
-    partial class ControleTIContextModelSnapshot : ModelSnapshot
+    [Migration("20210215151031_Usuarios")]
+    partial class Usuarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,13 +66,13 @@ namespace ControleTI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("FilialId");
+                    b.Property<int>("FilialId");
 
                     b.Property<string>("NomeCompleto");
 
                     b.Property<string>("NomeUsu");
 
-                    b.Property<int?>("SetorId");
+                    b.Property<int>("SetorId");
 
                     b.HasKey("Id");
 
@@ -92,11 +94,13 @@ namespace ControleTI.Migrations
                 {
                     b.HasOne("ControleTI.Models.Filial", "Filial")
                         .WithMany()
-                        .HasForeignKey("FilialId");
+                        .HasForeignKey("FilialId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ControleTI.Models.Setor", "Setor")
                         .WithMany()
-                        .HasForeignKey("SetorId");
+                        .HasForeignKey("SetorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
