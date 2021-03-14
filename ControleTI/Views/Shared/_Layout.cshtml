@@ -30,10 +30,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Filiais" asp-action="Index">Filiais</a></li>
-                    <li><a asp-area="" asp-controller="Setores" asp-action="Index">Setores</a></li>
+
+
                     <li><a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a></li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cadastros Adicionais
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a asp-area="" class="dropdown-item" asp-controller="Filiais" asp-action="Index">Filiais</a><br />
+                            <a asp-area="" class="dropdown-item" asp-controller="Setores" asp-action="Index">Setores</a>
+                        </div>
+                    </li>
+
+
                 </ul>
+
             </div>
         </div>
     </nav>

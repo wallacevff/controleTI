@@ -41,6 +41,7 @@ namespace ControleTI.Services
                 return;
             }
             _context.Update(usuario);
+            
             await _context.SaveChangesAsync();
         }
 
