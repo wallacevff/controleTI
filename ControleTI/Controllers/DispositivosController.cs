@@ -8,6 +8,7 @@ namespace ControleTI.Controllers
 {
     public class DispositivosController : Controller
     {
+
         public IActionResult Index()
         {
             return View();

@@ -49,6 +49,11 @@ namespace ControleTI.Data
             Usuario u5 = new Usuario(5, "lais.veiga", "Lais Canella Veiga", f1, s7);
             Usuario u6 = new Usuario(6, "eldine.oliveira", "Eldine Sanches Oliveira", f4, s11);
 
+            TipoDispositivo td1 = new TipoDispositivo(1, "Desktop");
+            TipoDispositivo td2 = new TipoDispositivo(2, "Notebook");
+            TipoDispositivo td3 = new TipoDispositivo(3, "AllInOne");
+            TipoDispositivo td4 = new TipoDispositivo(4, "Multifuncional");
+
             _context.Setor.AddRange(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11);
             _context.Filial.AddRange(f1, f2, f3, f4, f5, f6);
             _context.Usuario.AddRange(u1, u2, u3, u4, u5, u6);
