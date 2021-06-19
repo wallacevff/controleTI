@@ -21,7 +21,7 @@ namespace ControleTI.Services
 
         public async Task<List<SerialKey>> FindAllAsync()
         {
-            return await _context.SerialKey.ToListAsync();
+            return await _context.SerialKey.Include(obj => obj.Software).OrderBy(obj => obj.Software.Nome).ToListAsync();
         }
 
         public async Task UpdateAsync(SerialKey serialKey)
