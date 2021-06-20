@@ -92,5 +92,6 @@ namespace ControleTI.Controllers
             var dispositivo = await _dispositivoService.FindByIdAsync(id.Value);
             return View(dispositivo);
         }
+
     }
 }

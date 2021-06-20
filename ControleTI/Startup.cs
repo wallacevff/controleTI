@@ -46,6 +46,7 @@ namespace ControleTI
             services.AddTransient<ControleTI.Services.SoftwareService>();
             services.AddTransient<ControleTI.Services.DispositivoService>();
             services.AddTransient<ControleTI.Services.TipoDispositivoService>();
+            services.AddTransient<ControleTI.Services.DispositivoSoftwareService>();
             services.AddScoped<SeedingService>();
         }
 

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DispositivoSoftware>
+@{
+    ViewData["Title"] = "Dispositivos e Softwares";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    
+</p>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DispositivoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoftwareId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialKeyId)
+            </th>
+
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DispositivoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoftwareId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialKeyId)
+            </td>
+            
+
+            
+        </tr>
+        }
+    </tbody>
+</table>

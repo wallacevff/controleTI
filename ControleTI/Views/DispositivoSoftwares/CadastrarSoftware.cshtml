@@ -1,0 +1,31 @@
+﻿@model ControleTI.Models.ViewModels.DispositivoSoftwareViewModel
+@{
+    ViewData["Title"] = "Cadastrar Software"; // String.Concat("Cadastrar Software no Dispositivo: ", Model.Dispositivo.Nome);
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        Dispositivo
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Dispositivo.Nome)
+    </dd>
+
+</dl>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Criar">
+            <div class="form-group">
+                <input type="hidden" asp-for="DispositivoSoftware.DispositivoId" value="@Model.Dispositivo.Id" />
+                <label asp-for="Software.Nome" class="control-label">Software</label>
+                <select asp-for="DispositivoSoftware.SoftwareId" asp-items="@(new SelectList(Model.Softwares,"Id","Nome"))" class="form-control"></select>
+            </div>
+            <input type="submit" class="btn btn-success" asp-action="CadastrarSoftware" />
+            <a asp-controller="Dispositivos" asp-action="Detalhes" asp-route-id="@Model.Dispositivo.Id" class="btn btn-danger">Cancelar</a>
+        </form>
+</div>
+</div>
+

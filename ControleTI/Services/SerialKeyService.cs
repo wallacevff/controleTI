@@ -41,6 +41,13 @@ namespace ControleTI.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<List<SerialKey>> FindAllByIdAsync(int id)
+        {
+            return await _context.SerialKey
+                .Where(obj => obj.SoftwareId == id && obj.Restantes > 0)
+                .ToListAsync();
+        }
+
         public async Task CriarAssync(SerialKey serialKey)
         {
             await _context.SerialKey.AddAsync(serialKey);

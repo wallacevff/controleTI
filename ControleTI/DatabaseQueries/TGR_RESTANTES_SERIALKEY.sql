@@ -1,3 +1,4 @@
+USE controleti;
 DELIMITER $$
 CREATE TRIGGER TGR_INS_UTILIZADA_SERIALKEY after insert ON dispositivosoftware FOR EACH ROW
 BEGIN	
@@ -23,7 +24,13 @@ DELIMITER $$
 CREATE TRIGGER 	TGR_DLT_DISPOSITIVOSOFTWARE before delete ON dispositivo FOR EACH ROW
 BEGIN 
 	DELETE FROM dispositivosoftware where DispositivoId = old.id;
-	-- update serialkey set Utilizadas = Utilizadas-1 where softwareid in (select softwareid from dispositivosoftware ds where ds.DispositivoId = old.id);
-   --  update serialkey set Restantes = Quantidade - Utilizadas where softwareid in (select softwareid from dispositivosoftware ds where ds.DispositivoId = old.id);
+END$$
+
+DELIMITER $$
+CREATE TRIGGER 	TGR_UPD_DISPOSITIVOSOFTWARE before update ON dispositivosoftware FOR EACH ROW
+BEGIN 
+IF(NEW.softwareId != OLD.softwareId) THEN
+	update  dispositivosoftware set SerialKeyId = null where id = NEW.id;
+END IF;
 END$$
 DELIMITER ;
