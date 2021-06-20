@@ -10,6 +10,8 @@ namespace ControleTI.Models
         public int Id { get; set; }
         public string Tipo { get; set; }
 
+        public virtual ICollection<Dispositivo> Dispositivos { get; set; }
+
         public TipoDispositivo(int id, string tipo)
         {
             Id = id;

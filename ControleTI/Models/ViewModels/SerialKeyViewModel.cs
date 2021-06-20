@@ -9,6 +9,13 @@ namespace ControleTI.Models.ViewModels
     public class SerialKeyViewModel
     {
         public SerialKey SerialKey { get; set; }
+        public Software Software { get; set; }
         public List<Software> Softwares { get; set; }
+    
+        public SerialKeyViewModel()
+        {
+
+        }
     }
+  
 }

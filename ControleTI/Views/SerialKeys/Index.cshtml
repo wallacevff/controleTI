@@ -11,12 +11,24 @@
     <thead>
         <tr class="success">
             <th>
+                @Html.DisplayNameFor(model => model.Software.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Software.Nome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Key)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Utilizadas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restantes)
+            </th>
+
             <th></th>
             <th></th>
             <th></th>
@@ -28,20 +40,32 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Software)
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Software.Nome)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Key)
             </td>
-           
             <td>
-                <a asp-action="Editar" class="btn btn-primary" asp-route-id="@item.SoftwareId, @item.Key">Editar</a>
+                @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td>
-                <a asp-action="Detalhes" class="btn btn-warning" asp-route-id="@item.SoftwareId, @item.Key">Detalhes</a>
+                @Html.DisplayFor(modelItem => item.Utilizadas)
             </td>
             <td>
-                <a asp-action="Excluir" class="btn btn-danger" asp-route-id="@item.SoftwareId, @item.Key">Apagar</a>
+                @Html.DisplayFor(modelItem => item.Restantes)
+            </td>
+
+            <td>
+                <a asp-action="Editar" class="btn btn-primary" asp-route-id="@item.Id">Editar</a>
+            </td>
+            <td>
+                <a asp-action="Detalhes" class="btn btn-warning" asp-route-id="@item.Id">Detalhes</a>
+            </td>
+            <td>
+                <a asp-controller="SerialKeys" asp-action="Excluir" class="btn btn-danger" asp-route-id="@item.Id">Apagar</a>
             </td>
         </tr>
         }

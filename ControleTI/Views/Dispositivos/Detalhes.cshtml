@@ -1,0 +1,71 @@
+﻿@model Dispositivo
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Serial Key</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDispositivo.Tipo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoDispositivo.Tipo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MacAdress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MacAdress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.NomeUsu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.NomeUsu)
+        </dd>
+    </dl>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="success">
+                <th>
+                    Software
+                </th>
+                <th>
+                    Key
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DispositivosSoftwares)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(usu => item.Software.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(usu => item.SerialKey.Key)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
+    <a asp-action="index" class="btn btn-primary">Voltar</a>
+</div>

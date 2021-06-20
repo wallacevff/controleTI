@@ -4,22 +4,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ControleTI.Services;
+using ControleTI.Models;
 
 namespace ControleTI.Controllers
 {
-    public class TipoDispositivoController : Controller
+    public class TipoDispositivosController : Controller
     {
         private readonly TipoDispositivoService _tipoDispositivoService;
-        private readonly DispositivoService _dispositivoService;
 
-        public TipoDispositivoController(TipoDispositivoService tipoDispositivoService, DispositivoService dispositivoService)
+        public TipoDispositivosController(TipoDispositivoService tipoDispositivoService)
         {
             _tipoDispositivoService = tipoDispositivoService;
-            _dispositivoService = dispositivoService;
+   
         }
         public async Task<IActionResult> Index()
         {
             return View(await _tipoDispositivoService.FindAllAsync());
+        }
+
+        public async Task<IActionResult> Editar(int? id)
+        {
+
+            var setor = await _tipoDispositivoService.FindByIdAsync(id.Value);
+            return View(setor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(int? id, TipoDispositivo tipoDispositivo)
+        {
+            if (id != tipoDispositivo.Id)
+            {
+                return NotFound();
+            }
+            await _tipoDispositivoService.UpdateAsync(tipoDispositivo);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Criar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Criar(TipoDispositivo tipoDispositivo)
+        {
+            await _tipoDispositivoService.CriarAssync(tipoDispositivo);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Excluir(int? id)
+        {
+            TipoDispositivo tipoDispositivo = await _tipoDispositivoService.FindByIdAsync(id.Value);
+            return View(tipoDispositivo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Excluir(TipoDispositivo tipoDispositivo)
+        {
+            await _tipoDispositivoService.Delete(tipoDispositivo);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Detalhes(int? id)
+        {
+            TipoDispositivo tipoDispositivo = await _tipoDispositivoService.FindByIdAsync(id.Value);
+            return View(tipoDispositivo);
         }
     }
 }

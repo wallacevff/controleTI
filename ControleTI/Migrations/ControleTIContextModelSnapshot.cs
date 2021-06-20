@@ -30,17 +30,39 @@ namespace ControleTI.Migrations
 
                     b.Property<string>("Nome");
 
-                    b.Property<int?>("UsuarioId");
+                    b.Property<int?>("TipoDispositivoId");
 
-                    b.Property<int?>("tipoDispositivoId");
+                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TipoDispositivoId");
+
                     b.HasIndex("UsuarioId");
 
-                    b.HasIndex("tipoDispositivoId");
-
                     b.ToTable("Dispositivo");
+                });
+
+            modelBuilder.Entity("ControleTI.Models.DispositivoSoftware", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DispositivoId");
+
+                    b.Property<int>("SerialKeyId");
+
+                    b.Property<int>("SoftwareId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DispositivoId");
+
+                    b.HasIndex("SerialKeyId");
+
+                    b.HasIndex("SoftwareId");
+
+                    b.ToTable("DispositivoSoftware");
                 });
 
             modelBuilder.Entity("ControleTI.Models.Filial", b =>
@@ -57,13 +79,24 @@ namespace ControleTI.Migrations
 
             modelBuilder.Entity("ControleTI.Models.SerialKey", b =>
                 {
-                    b.Property<int>("SoftwareId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("IdInstalacao");
 
                     b.Property<string>("Key");
 
-                    b.HasKey("SoftwareId", "Key");
+                    b.Property<int>("Quantidade");
 
-                    b.HasAlternateKey("Key", "SoftwareId");
+                    b.Property<int>("Restantes");
+
+                    b.Property<int>("SoftwareId");
+
+                    b.Property<int>("Utilizadas");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SoftwareId");
 
                     b.ToTable("SerialKey");
                 });
@@ -85,28 +118,11 @@ namespace ControleTI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("DispositivoId");
-
                     b.Property<string>("Nome");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DispositivoId");
-
                     b.ToTable("Software");
-                });
-
-            modelBuilder.Entity("ControleTI.Models.SoftwareDispositivo", b =>
-                {
-                    b.Property<int>("DispositivoId");
-
-                    b.Property<int>("SoftwareId");
-
-                    b.HasKey("DispositivoId", "SoftwareId");
-
-                    b.HasIndex("SoftwareId");
-
-                    b.ToTable("SoftwareDispositivo");
                 });
 
             modelBuilder.Entity("ControleTI.Models.TipoDispositivo", b =>
@@ -145,39 +161,37 @@ namespace ControleTI.Migrations
 
             modelBuilder.Entity("ControleTI.Models.Dispositivo", b =>
                 {
+                    b.HasOne("ControleTI.Models.TipoDispositivo", "TipoDispositivo")
+                        .WithMany()
+                        .HasForeignKey("TipoDispositivoId");
+
                     b.HasOne("ControleTI.Models.Usuario", "Usuario")
                         .WithMany("Dispositivo")
                         .HasForeignKey("UsuarioId");
+                });
 
-                    b.HasOne("ControleTI.Models.TipoDispositivo", "tipoDispositivo")
-                        .WithMany()
-                        .HasForeignKey("tipoDispositivoId");
+            modelBuilder.Entity("ControleTI.Models.DispositivoSoftware", b =>
+                {
+                    b.HasOne("ControleTI.Models.Dispositivo", "Dispositivo")
+                        .WithMany("DispositivosSoftwares")
+                        .HasForeignKey("DispositivoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ControleTI.Models.SerialKey", "SerialKey")
+                        .WithMany("DispositivosSoftwares")
+                        .HasForeignKey("SerialKeyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ControleTI.Models.Software", "Software")
+                        .WithMany("DispositivosSoftwares")
+                        .HasForeignKey("SoftwareId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ControleTI.Models.SerialKey", b =>
                 {
                     b.HasOne("ControleTI.Models.Software", "Software")
                         .WithMany("Keys")
-                        .HasForeignKey("SoftwareId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ControleTI.Models.Software", b =>
-                {
-                    b.HasOne("ControleTI.Models.Dispositivo")
-                        .WithMany("Softwares")
-                        .HasForeignKey("DispositivoId");
-                });
-
-            modelBuilder.Entity("ControleTI.Models.SoftwareDispositivo", b =>
-                {
-                    b.HasOne("ControleTI.Models.Dispositivo", "Dispositivo")
-                        .WithMany()
-                        .HasForeignKey("DispositivoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ControleTI.Models.Software", "Software")
-                        .WithMany()
                         .HasForeignKey("SoftwareId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

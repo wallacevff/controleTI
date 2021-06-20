@@ -37,7 +37,7 @@ namespace ControleTI.Services
 
         public async Task<TipoDispositivo> FindByIdAsync(int id)
         {
-            return await _context.TipoDispositivo.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.TipoDispositivo.Include(obj => obj.Dispositivos).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task CriarAssync(TipoDispositivo tipoDispositivo)

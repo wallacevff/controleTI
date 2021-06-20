@@ -26,7 +26,7 @@ namespace ControleTI.Services
 
         public async Task UpdateAsync(SerialKey serialKey)
         {
-            bool temAlgum = await _context.SerialKey.AnyAsync(x => x.SoftwareId == serialKey.SoftwareId && x.Key == serialKey.Key);
+            bool temAlgum = await _context.SerialKey.AnyAsync(x => x.Id == serialKey.Id);
             if (!temAlgum)
             {
                 return;
@@ -35,9 +35,10 @@ namespace ControleTI.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<SerialKey> FindByIdAsync(int softwareId, string key )
+        public async Task<SerialKey> FindByIdAsync(int id)
         {
-            return await _context.SerialKey.Include(obj => obj.Software).FirstOrDefaultAsync(x => x.SoftwareId == softwareId && x.Key == key);
+            return await _context.SerialKey.Include(obj => obj.Software).Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.Dispositivo)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task CriarAssync(SerialKey serialKey)

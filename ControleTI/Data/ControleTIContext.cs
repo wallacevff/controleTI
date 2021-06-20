@@ -9,17 +9,28 @@ namespace ControleTI.Data
 {
     public class ControleTIContext : DbContext
     {
-        public ControleTIContext (DbContextOptions<ControleTIContext> options)
+        public ControleTIContext(DbContextOptions<ControleTIContext> options)
             : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ControleTI.Models.SerialKey>()
-                .HasKey(c => new { c.SoftwareId, c.Key });
+            //modelBuilder.Entity<ControleTI.Models.SerialKey>().HasKey(c => new { c.SoftwareId, c.Key });
 
-            modelBuilder.Entity<ControleTI.Models.SoftwareDispositivo>()
-                .HasKey(c => new { c.DispositivoId, c.SoftwareId });
+            modelBuilder.Entity<DispositivoSoftware>()
+                .HasOne(d => d.Software)
+                .WithMany(ds => ds.DispositivosSoftwares)
+                .HasForeignKey(si => si.SoftwareId);
+
+            modelBuilder.Entity<DispositivoSoftware>()
+                .HasOne(d => d.Dispositivo)
+                .WithMany(ds => ds.DispositivosSoftwares)
+                .HasForeignKey(di => di.DispositivoId);
+
+            modelBuilder.Entity<DispositivoSoftware>()
+                .HasOne(d => d.SerialKey)
+                .WithMany(sks => sks.DispositivosSoftwares)
+                .HasForeignKey(sk => sk.SerialKeyId);
         }
 
         public DbSet<ControleTI.Models.Filial> Filial { get; set; }
@@ -29,5 +40,7 @@ namespace ControleTI.Data
         public DbSet<ControleTI.Models.SerialKey> SerialKey { get; set; }
         public DbSet<ControleTI.Models.TipoDispositivo> TipoDispositivo { get; set; }
         public DbSet<ControleTI.Models.Dispositivo> Dispositivo { get; set; }
+        public DbSet<ControleTI.Models.Dispositivo> DispositivoSoftware { get; set; }
+
     }
 }

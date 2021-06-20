@@ -35,7 +35,7 @@ namespace ControleTI.Services
 
         public async Task<Software> FindByIdAsync(int id)
         {
-            return await _context.Software.Include(obj => obj.Keys).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Software.Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.Dispositivo).Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.SerialKey).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task CriarAssync(Software software)

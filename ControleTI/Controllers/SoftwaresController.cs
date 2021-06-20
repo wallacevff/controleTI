@@ -36,5 +36,43 @@ namespace ControleTI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Editar(int? id)
+        {
+
+            var software = await _softwareService.FindByIdAsync(id.Value);
+            return View(software);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(int? id, Software software)
+        {
+            if (id != software.Id)
+            {
+                return NotFound();
+            }
+            await _softwareService.UpdateAsync(software);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Excluir(int? id)
+        {
+            var setor = await _softwareService.FindByIdAsync(id.Value);
+            return View(setor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Excluir(Software software)
+        {
+            await _softwareService.Delete(software);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Detalhes(int? id)
+        {
+            var software = await _softwareService.FindByIdAsync(id.Value);
+            return View(software);
+        }
     }
 }

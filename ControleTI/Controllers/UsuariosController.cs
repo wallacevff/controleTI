@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ControleTI.Services;
-using ControleTI.Models.VewModels;
+using ControleTI.Models.ViewModels;
 using ControleTI.Models;
 using ControleTI.Data;
 using Microsoft.EntityFrameworkCore;

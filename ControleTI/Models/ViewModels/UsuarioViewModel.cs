@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ControleTI.Models;
 
-namespace ControleTI.Models.VewModels
+namespace ControleTI.Models.ViewModels
 {
     public class UsuarioViewModel
     {

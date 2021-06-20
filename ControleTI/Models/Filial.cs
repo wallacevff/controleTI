@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ControleTI.Models
 {
     public class Filial
     {
         public int Id { get; set; }
+        [Display(Name = "Filial")]
         public string Nome { get; set; }
         public Filial(int id, string nome)
         {

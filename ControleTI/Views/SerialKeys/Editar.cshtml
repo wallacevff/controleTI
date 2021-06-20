@@ -1,0 +1,28 @@
+﻿@model ControleTI.Models.ViewModels.SerialKeyViewModel
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Editar">
+            <input type="hidden" asp-for="SerialKey.Id" />
+            <div class="form-group">
+                <label asp-for="@Model.Software.Nome" class="control-label"></label><br />
+                <select asp-for="@Model.SerialKey.SoftwareId" asp-items="@(new SelectList(Model.Softwares,"Id","Nome"))" class="form-control"></select>
+                <label asp-for="SerialKey.Key" class="control-label"></label>
+                <input asp-for="SerialKey.Key" class="form-control" />
+                <label asp-for="SerialKey.Quantidade" class="control-label"></label>
+                <input asp-for="SerialKey.Quantidade" class="form-control" />
+                <label asp-for="SerialKey.Utilizadas" class="control-label"></label>
+                <input asp-for="SerialKey.Utilizadas" class="form-control" />
+                <span asp-validation-for="SerialKey.Key" class="text-danger"></span>
+            </div>
+            <input type="submit" class="btn btn-success" asp-action="Editar" value="Salvar" />
+            <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+        </form>
+    </div>
+</div>

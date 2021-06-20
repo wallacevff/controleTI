@@ -21,7 +21,7 @@ namespace ControleTI.Services
 
         public async Task<List<Dispositivo>> FindAllAsync()
         {
-            return await _context.Dispositivo.ToListAsync();
+            return await _context.Dispositivo.Include(obj => obj.TipoDispositivo).Include(obj => obj.Usuario).ToListAsync();
         }
 
         public async Task UpdateAsync(Dispositivo dispositivo)
@@ -37,7 +37,12 @@ namespace ControleTI.Services
 
         public async Task<Dispositivo> FindByIdAsync(int id)
         {
-            return await _context.Dispositivo.Include(obj => obj.TipoDispositivo).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Dispositivo
+                .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Usuario)
+                .Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.Software)
+                .Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.SerialKey)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task CriarAssync(Dispositivo dispositivo)
