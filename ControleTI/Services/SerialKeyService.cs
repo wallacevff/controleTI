@@ -38,6 +38,7 @@ namespace ControleTI.Services
         public async Task<SerialKey> FindByIdAsync(int id)
         {
             return await _context.SerialKey.Include(obj => obj.Software).Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.Dispositivo)
+                .ThenInclude(obj => obj.Usuario)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
