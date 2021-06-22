@@ -54,9 +54,6 @@ namespace ControleTI.Controllers
         {
             
             await _dispositivoSoftwareService.CriarAssync(dispositivoSoftware);
-            Dictionary<string, int> routeValues;
-            routeValues = new Dictionary<string, int>();
-            routeValues["id"] = dispositivoSoftware.DispositivoId;
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }
 
@@ -85,7 +82,8 @@ namespace ControleTI.Controllers
                 return NotFound();
             }
             SerialKey serialKey = await _serialKeyService.FindByIdAsync(dispositivoSoftware.SerialKeyId.Value);
-            serialKey.Utilizadas = serialKey.Utilizadas ++;
+            serialKey.UtilizadasIncrementar();
+            await _serialKeyService.UpdateAsync(serialKey);
             await _dispositivoSoftwareService.UpdateAsync(dispositivoSoftware);
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }
@@ -97,7 +95,8 @@ namespace ControleTI.Controllers
         {
             DispositivoSoftware dispositivoSoftware = await _dispositivoSoftwareService.FindByIdAsync(id);
             SerialKey serialKey = await _serialKeyService.FindByIdAsync(dispositivoSoftware.SerialKeyId.Value);
-            serialKey.Utilizadas = serialKey.Utilizadas--;
+            serialKey.UtilizadasDecrementar();
+            await _serialKeyService.UpdateAsync(serialKey);
             await _dispositivoSoftwareService.Delete(dispositivoSoftware);
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }

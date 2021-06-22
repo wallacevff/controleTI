@@ -32,6 +32,18 @@ namespace ControleTI.Models
             Restantes = Quantidade - Utilizadas;
         }
 
+        public void UtilizadasIncrementar()
+        {
+            Utilizadas++;
+            RestantesAtualizar();
+        }
+
+        public void UtilizadasDecrementar()
+        {
+            Utilizadas--;
+            RestantesAtualizar();
+        }
+
         public SerialKey(string key, Software software)
         {
             Key = key;
