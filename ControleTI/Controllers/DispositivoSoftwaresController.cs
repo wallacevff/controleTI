@@ -94,9 +94,13 @@ namespace ControleTI.Controllers
         public async Task<IActionResult> Apagar(int id)
         {
             DispositivoSoftware dispositivoSoftware = await _dispositivoSoftwareService.FindByIdAsync(id);
-            SerialKey serialKey = await _serialKeyService.FindByIdAsync(dispositivoSoftware.SerialKeyId.Value);
-            serialKey.UtilizadasDecrementar();
-            await _serialKeyService.UpdateAsync(serialKey);
+            if (dispositivoSoftware.SerialKeyId != null)
+            {
+                SerialKey serialKey = await _serialKeyService.FindByIdAsync(dispositivoSoftware.SerialKeyId.Value);
+                serialKey.UtilizadasDecrementar();
+                await _serialKeyService.UpdateAsync(serialKey);
+            }
+            
             await _dispositivoSoftwareService.Delete(dispositivoSoftware);
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }
