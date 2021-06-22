@@ -46,17 +46,29 @@
                 <th>
                     Dispositivos com esta Serial Key
                 </th>
+                <th>
+                    Usuário
+                </th>
+                <th>
+                    Id Instalação
+                </th>
 
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.DispositivosSoftwares)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(usu => item.Dispositivo.Nome)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(usu => item.Dispositivo.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(usu => item.Dispositivo.Usuario.NomeUsu)
+                </td>
+                <td>
+                    @Html.DisplayFor(usu => item.IdInstalacao)
+                </td>
+            </tr>
             }
         </tbody>
     </table>

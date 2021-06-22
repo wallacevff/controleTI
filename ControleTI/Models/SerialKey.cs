@@ -15,7 +15,7 @@ namespace ControleTI.Models
        // [Key, Column(Order = 1)]
         public String Key { get; set; }
         [Display(Name = "Id de Instalação")]
-        public String IdInstalacao { get; set; }
+        // public String IdInstalacao { get; set; }
         public Software Software { get; set; }
         public int Quantidade { get; set; }
         public int Utilizadas { get; set; }

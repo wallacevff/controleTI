@@ -15,7 +15,7 @@ namespace ControleTI.Models
         public DispositivoSoftware() { }
         public int? SerialKeyId { get; set; }
         public SerialKey SerialKey { get; set; }
-
+        public string IdInstalacao { get; set; }
         public DispositivoSoftware(int id, int dispositivoId, Dispositivo dispositivo, int softwareId, Software software)
         {
             Id = id;

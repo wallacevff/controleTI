@@ -13,8 +13,6 @@
                 <select asp-for="SerialKey.SoftwareId" asp-items="@(new SelectList(Model.Softwares,"Id","Nome"))" class="form-control"></select>
                 <label asp-for="SerialKey.Key" class="control-label"></label>
                 <input asp-for="SerialKey.Key" class="form-control" />
-                <label asp-for="SerialKey.IdInstalacao" class="control-label"></label>
-                <input asp-for="SerialKey.IdInstalacao" class="form-control" />
                 <label asp-for="SerialKey.Quantidade" class="control-label"></label>
                 <input asp-for="SerialKey.Quantidade" class="form-control" />
             </div>

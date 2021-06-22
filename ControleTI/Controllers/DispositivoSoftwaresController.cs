@@ -88,7 +88,48 @@ namespace ControleTI.Controllers
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }
 
-      
+
+
+
+
+
+
+
+        public async Task<IActionResult> CadastrarIdInstalacao(int id)
+        {
+            DispositivoSoftware dispositivoSoftware = await _dispositivoSoftwareService.FindByIdAsync(id);
+
+            DispositivoSoftwareViewModel viewModel = new ControleTI.Models.ViewModels.DispositivoSoftwareViewModel
+            {
+                DispositivoSoftware = dispositivoSoftware,
+                Dispositivo = await _dispositivoService.FindByIdAsync(dispositivoSoftware.DispositivoId),
+                Software = await _softwareService.FindByIdAsync(dispositivoSoftware.SoftwareId),
+                SerialKey = await _serialKeyService.FindByIdAsync(dispositivoSoftware.SerialKeyId.Value)
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> CadastrarIdInstalacao(int id, DispositivoSoftware dispositivoSoftware)
+        {
+
+            if (id != dispositivoSoftware.Id)
+            {
+                return NotFound();
+            }
+            await _dispositivoSoftwareService.UpdateAsync(dispositivoSoftware);
+            return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
+        }
+
+
+
+
+
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> Apagar(int id)

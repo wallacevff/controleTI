@@ -23,7 +23,13 @@
                     Dispositivo
                 </th>
                 <th>
+                    Usuário
+                </th>
+                <th>
                     Serial Key
+                </th>
+                <th>
+                    Id Instalação
                 </th>
             </tr>
         </thead>
@@ -35,7 +41,13 @@
                     @Html.DisplayFor(usu => item.Dispositivo.Nome)
                 </td>
                 <td>
+                    @Html.DisplayFor(usu => item.Dispositivo.Usuario.NomeUsu)
+                </td>
+                <td>
                     @Html.DisplayFor(usu => item.SerialKey.Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(usu => item.IdInstalacao)
                 </td>
             </tr>
             }

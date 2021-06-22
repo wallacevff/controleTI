@@ -20,6 +20,14 @@
         @Html.DisplayFor(model => model.Software.Nome)
     </dd>
 
+      <dt>
+        Software
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.SerialKey.Key)
+    </dd>
+
+
 </dl>
 
 <div class="row">
@@ -29,12 +37,13 @@
                 <input type="hidden" asp-for="DispositivoSoftware.Id" />
                 <input type="hidden" asp-for="DispositivoSoftware.DispositivoId" value="@Model.Dispositivo.Id" />
                 <input type="hidden" asp-for="DispositivoSoftware.SoftwareId" value="@Model.Software.Id" />
+                <input type="hidden" asp-for="DispositivoSoftware.SerialKeyId" value="@Model.SerialKey.Id" />
                 <label asp-for="SerialKey.Id" class="control-label">Serial Key</label>
-                <select asp-for="DispositivoSoftware.SerialKeyId" asp-items="@(new SelectList(Model.SerialKeys,"Id","Key"))" class="form-control"></select>
+
                 <label asp-for="DispositivoSoftware.IdInstalacao" class="control-label">Id de Instalação</label>
-                <input asp-for="DispositivoSoftware.IdInstalacao"  class="form-control" />
+                <input asp-for="DispositivoSoftware.IdInstalacao" class="form-control" />
             </div>
-            <input type="submit" class="btn btn-success" asp-action="CadastrarSerialKey" />
+            <input type="submit" class="btn btn-success" asp-action="CadastrarIdInstalacao" />
             <a asp-controller="Dispositivos" asp-action="Detalhes" asp-route-id="@Model.Dispositivo.Id" class="btn btn-danger">Cancelar</a>
         </form>
 </div>

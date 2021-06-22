@@ -7,7 +7,7 @@ namespace ControleTI.Models.ViewModels
         public DispositivoSoftware DispositivoSoftware { get; set; }
         public Dispositivo Dispositivo { set; get; }
         public Software Software { get; set; }
-        public Software SerialKey { get; set; }
+        public SerialKey SerialKey { get; set; }
         public List<Software> Softwares { get; set; }
         public List<SerialKey> SerialKeys { set; get; }
     }
