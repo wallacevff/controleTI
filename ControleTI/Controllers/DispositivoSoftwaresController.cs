@@ -84,10 +84,8 @@ namespace ControleTI.Controllers
             {
                 return NotFound();
             }
-            Dictionary<string, int> routeValues;
-            routeValues = new Dictionary<string, int>();
-            routeValues["id"] = dispositivoSoftware.DispositivoId;
-
+            SerialKey serialKey = await _serialKeyService.FindByIdAsync(dispositivoSoftware.SerialKeyId.Value);
+            serialKey.Utilizadas = serialKey.Utilizadas ++;
             await _dispositivoSoftwareService.UpdateAsync(dispositivoSoftware);
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }
@@ -98,7 +96,8 @@ namespace ControleTI.Controllers
         public async Task<IActionResult> Apagar(int id)
         {
             DispositivoSoftware dispositivoSoftware = await _dispositivoSoftwareService.FindByIdAsync(id);
-
+            SerialKey serialKey = await _serialKeyService.FindByIdAsync(dispositivoSoftware.SerialKeyId.Value);
+            serialKey.Utilizadas = serialKey.Utilizadas--;
             await _dispositivoSoftwareService.Delete(dispositivoSoftware);
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }

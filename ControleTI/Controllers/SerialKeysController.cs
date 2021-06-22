@@ -16,11 +16,13 @@ namespace ControleTI.Controllers
     {
         private readonly SerialKeyService _serialKeyService;
         private readonly SoftwareService _softwareService;
+        private readonly DispositivoSoftwareService _dispositivoSoftwareService;
 
-        public SerialKeysController(SerialKeyService serialKeyService, SoftwareService softwareService)
+        public SerialKeysController(SerialKeyService serialKeyService, SoftwareService softwareService, DispositivoSoftwareService dispositivoSoftwareService)
         {
             _serialKeyService = serialKeyService;
             _softwareService = softwareService;
+            _dispositivoSoftwareService = dispositivoSoftwareService;
         }
         public async Task<IActionResult> Index()
         {
@@ -34,7 +36,7 @@ namespace ControleTI.Controllers
             {
                 Softwares = softwares
             };
-         
+
             return View(viewModel);
         }
 
@@ -62,12 +64,12 @@ namespace ControleTI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar(int id, SerialKey serialKey)
         {
-           
+
             if (id != serialKey.Id)
             {
                 return NotFound();
             }
-           
+
             serialKey.RestantesAtualizar();
             await _serialKeyService.UpdateAsync(serialKey);
             return RedirectToAction(nameof(Index));
@@ -84,6 +86,17 @@ namespace ControleTI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Excluir(SerialKey serialKey)
         {
+            List<DispositivoSoftware> dispositivoSoftwares = await _dispositivoSoftwareService.FindByKeyIdAsync(serialKey.Id);
+
+            if(!(dispositivoSoftwares == null))
+            {
+                foreach (DispositivoSoftware ds in dispositivoSoftwares)
+                {
+                    ds.SerialKeyId = null;
+                    await _dispositivoSoftwareService.UpdateAsync(ds);
+                }
+            }
+            
             await _serialKeyService.Delete(serialKey);
             return RedirectToAction(nameof(Index));
         }
@@ -91,7 +104,7 @@ namespace ControleTI.Controllers
         public async Task<IActionResult> Detalhes(int id)
         {
             var serialKey = await _serialKeyService.FindByIdAsync(id);
-         
+
             return View(serialKey);
         }
 

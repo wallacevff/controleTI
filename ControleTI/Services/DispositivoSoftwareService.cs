@@ -68,6 +68,10 @@ namespace ControleTI.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<DispositivoSoftware>> FindByKeyIdAsync(int serialKeyId)
+        {
+            return await _context.DispositivoSoftware.Where(obj => obj.SerialKeyId == serialKeyId).ToListAsync();
+        }
 
     }
 }

@@ -47,11 +47,11 @@ namespace ControleTI
             services.AddTransient<ControleTI.Services.DispositivoService>();
             services.AddTransient<ControleTI.Services.TipoDispositivoService>();
             services.AddTransient<ControleTI.Services.DispositivoSoftwareService>();
-            services.AddScoped<SeedingService>();
+            //services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seed)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +66,7 @@ namespace ControleTI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseHttpsRedirection();
 
             app.UseMvc(routes =>
             {
@@ -74,7 +75,7 @@ namespace ControleTI
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            seed.Seed();
+            
         }
     }
 }
