@@ -20,7 +20,7 @@ namespace ControleTI
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
             .UseStartup<Startup>()
-            .UseUrls("http://0.0.0.0:8090", "http://192.168.245.103:8080")
+            .UseUrls("http://0.0.0.0:8090")
             .UseIISIntegration();
     }
 }
