@@ -77,10 +77,12 @@
 
                 </td>
                 <td>
+                    @if (item.SerialKeyId != null) { 
                     @if (item.IdInstalacao == null)
                         { <a asp-controller="DispositivoSoftwares" asp-action="CadastrarIdInstalacao" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar</a> }
                         
                     @Html.DisplayFor(modelItem => item.IdInstalacao)
+                    }
                 </td>
                 <td>
                     <a asp-controller="DispositivoSoftwares" asp-action="Apagar" class="btn btn-danger" asp-route-id="@item.Id">Apagar</a>
