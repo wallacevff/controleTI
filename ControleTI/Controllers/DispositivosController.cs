@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using ControleTI.Services;
 using ControleTI.Models;
 using ControleTI.Models.ViewModels;
+using System.Collections.Generic;
 
 namespace ControleTI.Controllers
 {
@@ -24,9 +25,16 @@ namespace ControleTI.Controllers
             _serialKeyService = serialKeyService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _dispositivoService.FindAllAsync());
+            List<Dispositivo> dispositivos = await _dispositivoService.FindAllAsync();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                dispositivos = await _dispositivoService.PesquisaNome(searchString);
+            }
+
+            return View(dispositivos);
         }
 
 

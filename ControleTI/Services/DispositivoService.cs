@@ -57,6 +57,11 @@ namespace ControleTI.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Dispositivo>> PesquisaNome(string pesquisa)
+        {
+            return await _context.Dispositivo.Where(d => d.Nome.Contains(pesquisa)).ToListAsync();
+        }
+
 
     }
 }
