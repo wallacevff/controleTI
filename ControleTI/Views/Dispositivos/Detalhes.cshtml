@@ -40,6 +40,11 @@
             @Html.DisplayFor(model => model.Usuario.NomeUsu)
         </dd>
     </dl>
+    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
+    <a asp-controller="DispositivoSoftwares" asp-action="CadastrarSoftware" asp-route-dispositivoId="@Model.Id" class="btn btn-warning">Adicionar Software</a>
+    <a asp-action="index" class="btn btn-primary">Voltar</a>
+    <br />
+    <br />
     <table class="table table-striped table-hover">
         <thead>
             <tr class="success">
@@ -59,39 +64,38 @@
         <tbody>
             @foreach (var item in Model.DispositivosSoftwares)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(usu => item.Software.Nome)
-                </td>
-                <td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(usu => item.Software.Nome)
+                    </td>
+                    <td>
 
-                    @if (item.SerialKeyId == null)
-                    {
+                        @if (item.SerialKeyId == null)
+                        {
 
-                        <a asp-controller="DispositivoSoftwares" asp-action="CadastrarSerialKey" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar Key</a>
+                            <a asp-controller="DispositivoSoftwares" asp-action="CadastrarSerialKey" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar Key</a>
 
-                    }
+                        }
 
-                    @Html.DisplayFor(modelItem => item.SerialKey.Key)
+                        @Html.DisplayFor(modelItem => item.SerialKey.Key)
 
 
-                </td>
-                <td>
-                    @if (item.SerialKeyId != null) { 
-                    @if (item.IdInstalacao == null)
-                        { <a asp-controller="DispositivoSoftwares" asp-action="CadastrarIdInstalacao" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar</a> }
-                        
-                    @Html.DisplayFor(modelItem => item.IdInstalacao)
-                    }
-                </td>
-                <td>
-                    <a asp-controller="DispositivoSoftwares" asp-action="Apagar" class="btn btn-danger" asp-route-id="@item.Id">Apagar</a>
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        @if (item.SerialKeyId != null)
+                        {
+                            @if (item.IdInstalacao == null)
+                            {<a asp-controller="DispositivoSoftwares" asp-action="CadastrarIdInstalacao" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar</a>}
+
+                            @Html.DisplayFor(modelItem => item.IdInstalacao)
+                        }
+                    </td>
+                    <td>
+                        <a asp-controller="DispositivoSoftwares" asp-action="Apagar" class="btn btn-danger" asp-route-id="@item.Id">Apagar</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
-    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
-    <a asp-controller="DispositivoSoftwares" asp-action="CadastrarSoftware" asp-route-dispositivoId="@Model.Id" class="btn btn-warning">Adicionar Software</a>
-    <a asp-action="index" class="btn btn-primary">Voltar</a>
+
 </div>

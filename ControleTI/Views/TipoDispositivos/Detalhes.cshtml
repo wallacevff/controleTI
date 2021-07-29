@@ -22,6 +22,10 @@
             @Html.DisplayFor(model => model.Tipo)
         </dd>
     </dl>
+    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
+    <a asp-action="index" class="btn btn-primary">Voltar</a>
+    <br />
+    <br />
     <table class="table table-striped table-hover">
         <thead>
             <tr class="success">
@@ -42,6 +46,5 @@
             }
         </tbody>
     </table>
-    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
-    <a asp-action="index" class="btn btn-primary">Voltar</a>
+
 </div>

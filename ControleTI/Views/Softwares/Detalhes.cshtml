@@ -16,43 +16,11 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
     </dl>
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr class="success">
-                <th>
-                    Dispositivo
-                </th>
-                <th>
-                    Usuário
-                </th>
-                <th>
-                    Serial Key
-                </th>
-                <th>
-                    Id Instalação
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.DispositivosSoftwares)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(usu => item.Dispositivo.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(usu => item.Dispositivo.Usuario.NomeUsu)
-                </td>
-                <td>
-                    @Html.DisplayFor(usu => item.SerialKey.Key)
-                </td>
-                <td>
-                    @Html.DisplayFor(usu => item.IdInstalacao)
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+   
     <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
     <a asp-action="index" class="btn btn-primary">Voltar</a>
+
+    <br />
+    <br />
+    <partial name="_ListarDispositivoSoftware" model="Model.DispositivosSoftwares" />
 </div>
