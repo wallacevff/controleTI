@@ -61,7 +61,12 @@ namespace ControleTI.Services
         {
             return await _context.Dispositivo.Where(d => d.Nome.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
         }
-
+        public async Task<List<Dispositivo>> PesquisaUsuario(string pesquisa)
+        {
+            return await _context.Dispositivo
+                .Include(obj => obj.Usuario)                
+                .Where(d => d.Usuario.NomeUsu.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
+        }
 
     }
 }

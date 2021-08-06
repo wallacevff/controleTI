@@ -10,6 +10,12 @@
         <button type="submit" class="btn glyphicon glyphicon-search"></button>
     </div>
 </form>
+<form class="navbar-form navbar-right" asp-controller="Dispositivos" asp-action="PesquisarUsuario" method="get">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Nome do Usuário" name="searchString" value="@ViewData["searchString"]">
+        <button type="submit" class="btn glyphicon glyphicon-search"></button>
+    </div>
+</form>
 <p>
     <a asp-action="Criar" class="btn btn-success">Adicionar</a>
 </p>

@@ -114,5 +114,19 @@ namespace ControleTI.Controllers
             }
             return View("/Views/Dispositivos/Index.cshtml", dispositivos);
         }
+
+        public async Task<IActionResult> PesquisarUsuario(string searchString)
+        {
+            IEnumerable<Dispositivo> dispositivos;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                dispositivos = await _dispositivoService.PesquisaUsuario(searchString);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View("/Views/Dispositivos/Index.cshtml", dispositivos);
+        }
     }
 }
