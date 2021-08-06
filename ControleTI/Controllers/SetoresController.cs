@@ -75,5 +75,6 @@ namespace ControleTI.Controllers
             var setor = await _setorService.FindByIdAsync(id.Value);
             return View(setor);
         }
+
     }
 }

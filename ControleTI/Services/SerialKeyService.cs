@@ -61,6 +61,19 @@ namespace ControleTI.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<SerialKey>> PesquisaNome(string pesquisa)
+        {
+            return await _context.SerialKey
+                .Include(obj => obj.Software)
+                .Where(d => d.Key.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
+        }
+        public async Task<List<SerialKey>> PesquisaSoftware(string pesquisa)
+        {
+            return await _context.SerialKey
+                .Include(obj => obj.Software)                
+                .Where(d => d.Software.Nome.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
+        }
+
 
     }
 }

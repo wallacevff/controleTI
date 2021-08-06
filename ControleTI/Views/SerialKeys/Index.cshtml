@@ -4,6 +4,19 @@
 }
 
 <h2>@ViewData["Title"]</h2>
+
+<form class="navbar-form navbar-right" asp-controller="SerialKeys" asp-action="Pesquisar" method="get">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Procurar Serial Key" name="searchString" value="@ViewData["searchString"]">
+        <button type="submit" class="btn glyphicon glyphicon-search"></button>
+    </div>
+</form>
+<form class="navbar-form navbar-right" asp-controller="SerialKeys" asp-action="PesquisarSoftware" method="get">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Nome do software" name="searchString" value="@ViewData["searchString"]">
+        <button type="submit" class="btn glyphicon glyphicon-search"></button>
+    </div>
+</form>
 <p>
     <a asp-action="Criar" class="btn btn-success">Adicionar</a>
 </p>

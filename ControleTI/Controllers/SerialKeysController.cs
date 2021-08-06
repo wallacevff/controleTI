@@ -108,5 +108,33 @@ namespace ControleTI.Controllers
             return View(serialKey);
         }
 
+        public async Task<IActionResult> Pesquisar(string searchString)
+        {
+            IEnumerable<SerialKey> serialKeys;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                serialKeys = await _serialKeyService.PesquisaNome(searchString);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View("~/Views/SerialKeys/Index.cshtml", serialKeys);
+        }
+
+        public async Task<IActionResult> PesquisarSoftware(string searchString)
+        {
+            IEnumerable<SerialKey> serialKeys;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                serialKeys = await _serialKeyService.PesquisaSoftware(searchString);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View("~/Views/SerialKeys/Index.cshtml", serialKeys);
+        }
+
     }
 }
