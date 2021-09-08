@@ -28,36 +28,36 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Controle TI</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">                   
+                <ul class="nav navbar-nav">
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dispositivos
+                            Dispositivos <span class="caret"></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-area="" asp-controller="Dispositivos" asp-action="Index">Listar</a><br />
-                            <a asp-area="" asp-controller="TipoDispositivos" asp-action="Index">Tipo Dispositivos</a>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a asp-area="" asp-controller="Dispositivos" asp-action="Index">Listar</a></li>
+                            <li><a asp-area="" asp-controller="TipoDispositivos" asp-action="Index">Tipo Dispositivos</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Softwares
+                            Softwares <span class="caret"></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-area="" asp-controller="Softwares" asp-action="Index">Listar</a><br />
-                            <a asp-area="" asp-controller="SerialKeys" asp-action="Index">Serial Keys</a>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a asp-area="" asp-controller="Softwares" asp-action="Index">Listar</a></li>
+                            <li><a asp-area="" asp-controller="SerialKeys" asp-action="Index">Serial Keys</a></li>
+                        </ul>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Cadastros Adicionais
+                            Cadastros Adicionais <span class="caret"></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-area="" class="dropdown-item" asp-controller="Filiais" asp-action="Index">Filiais</a><br />
-                            <a asp-area="" class="dropdown-item" asp-controller="Setores" asp-action="Index">Setores</a><br />
-                            <a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a asp-area="" class="dropdown-item" asp-controller="Filiais" asp-action="Index">Filiais</a></li>
+                            <li><a asp-area="" class="dropdown-item" asp-controller="Setores" asp-action="Index">Setores</a></li>
+                            <li><a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a></li>
+                        </ul>
                     </li>
 
 
