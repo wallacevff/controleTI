@@ -11,7 +11,7 @@
         <form asp-action="Editar">
             <div class="form-group">
                 <input type="hidden" asp-for="Dispositivo.Id" />
-                <label asp-for="Dispositivo.Nome" class="control-label">Dispositivo</label>
+                <label asp-for="Dispositivo.Nome" class="control-label"></label>
                 <input asp-for="Dispositivo.Nome" class="form-control" />
                 <label asp-for="Dispositivo.TipoDispositivoId" class="control-label">Tipo de Dispositivo</label>
                 <select asp-for="Dispositivo.TipoDispositivoId" asp-items="@(new SelectList(Model.TiposDispositivos,"Id","Tipo"))" class="form-control"></select>
@@ -19,6 +19,13 @@
                 <input asp-for="Dispositivo.MacAdress" class="form-control" />
                 <label asp-for="Dispositivo.UsuarioId" class="control-label">Usuário</label>
                 <select asp-for="Dispositivo.UsuarioId" asp-items="@(new SelectList(Model.Usuarios,"Id","NomeUsu"))" class="form-control"></select>
+                <span></span>
+                <label asp-for="Dispositivo.Processador" class="control-label"></label>
+                <input asp-for="Dispositivo.Processador" class="form-control" />
+                <label asp-for="Dispositivo.Memoria" class="control-label"></label>
+                <input asp-for="Dispositivo.Memoria" class="form-control" />
+                <label asp-for="Dispositivo.Hd" class="control-label"></label>
+                <input asp-for="Dispositivo.Hd" class="form-control" />
             </div>
             <input type="submit" class="btn btn-success" asp-action="Editar" value="Salvar" />
             <a asp-action="Index" class="btn btn-danger">Cancelar</a>

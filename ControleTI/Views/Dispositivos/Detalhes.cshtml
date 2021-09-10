@@ -39,6 +39,26 @@
         <dd>
             @Html.DisplayFor(model => model.Usuario.NomeUsu)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Processador)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Processador)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Memoria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Memoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hd)
+        </dd>
     </dl>
     <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
     <a asp-controller="DispositivoSoftwares" asp-action="CadastrarSoftware" asp-route-dispositivoId="@Model.Id" class="btn btn-warning">Adicionar Software</a>
