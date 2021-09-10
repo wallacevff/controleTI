@@ -18,6 +18,17 @@ namespace ControleTI.Models
         public Usuario Usuario { get; set; }
         public virtual ICollection<DispositivoSoftware> DispositivosSoftwares { get; set; }
 
+
+        //Hardware
+        [Display(Name = "Processador")]
+        public string Processador { get; set; }
+        [Display(Name = "Memória RAM")]
+        public string Memoria { get; set; }
+        [Display(Name = "HD/SSD")]
+        public string Hd { get; set; }
+
+
+
         public Dispositivo(int id, string nome, string macAdress, int idTipo)
         {
             Id = id;
