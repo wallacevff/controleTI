@@ -6,6 +6,7 @@ namespace ControleTI.Models.ViewModels
     {
         public Dispositivo Dispositivo { set; get; }
         public List<TipoDispositivo> TiposDispositivos { get; set; }
+        public List<Status> Status { get; set; }
         public List<Usuario> Usuarios { set; get; }
     }
 }
