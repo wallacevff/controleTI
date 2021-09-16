@@ -41,6 +41,7 @@ namespace ControleTI.Data
         public DbSet<ControleTI.Models.TipoDispositivo> TipoDispositivo { get; set; }
         public DbSet<ControleTI.Models.Dispositivo> Dispositivo { get; set; }
         public DbSet<ControleTI.Models.DispositivoSoftware> DispositivoSoftware { get; set; }
+        public DbSet<ControleTI.Models.Status> Status { get; set; }
 
 
     }

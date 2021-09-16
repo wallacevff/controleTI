@@ -1,0 +1,32 @@
+﻿@model Status
+@{
+    ViewData["Title"] = "Excluir";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Deseja Exluir?</h3>
+
+<div>
+    <h4>Setor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StatusId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusNome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StatusNome)
+        </dd>
+    </dl>
+    <form asp-action="Excluir">
+        <input type="hidden" asp-for="StatusId" />
+        <input type="submit" class="btn btn-danger" asp-action="Excluir" value="Sim"/>
+        <a asp-action="index" class="btn btn-success">Não</a>
+    </form>
+</div>
