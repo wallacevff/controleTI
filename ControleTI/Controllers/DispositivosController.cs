@@ -4,6 +4,7 @@ using ControleTI.Services;
 using ControleTI.Models;
 using ControleTI.Models.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ControleTI.Controllers
 {
@@ -14,15 +15,18 @@ namespace ControleTI.Controllers
         private readonly TipoDispositivoService _tipoDispositivoService;
         private readonly SoftwareService _softwareService;
         private readonly SerialKeyService _serialKeyService;
+        private readonly StatusService _statusService;
 
         public DispositivosController(DispositivoService dispositivoService, UsuarioService usuarioService,
-            TipoDispositivoService tipoDispositivoService, SoftwareService softwareService, SerialKeyService serialKeyService)
+            TipoDispositivoService tipoDispositivoService, SoftwareService softwareService, SerialKeyService serialKeyService,
+            StatusService statusService)
         {
             _dispositivoService = dispositivoService;
             _usuarioService = usuarioService;
             _tipoDispositivoService = tipoDispositivoService;
             _softwareService = softwareService;
             _serialKeyService = serialKeyService;
+            _statusService = statusService;
         }
 
         public async Task<IActionResult> Index(string searchString)
@@ -42,10 +46,12 @@ namespace ControleTI.Controllers
         {
             var tiposDispositivos = await _tipoDispositivoService.FindAllAsync();
             var usarios = await _usuarioService.FindAllAsync();
+            List<Status> status = await _statusService.Listar();
             DispositivoViewModel dispositivoViewModel = new DispositivoViewModel
             {
                 TiposDispositivos = tiposDispositivos,
-                Usuarios = usarios
+                Usuarios = usarios,
+                Status = status
             };
             return View(dispositivoViewModel);
         }
@@ -64,7 +70,8 @@ namespace ControleTI.Controllers
             {
                 TiposDispositivos = await _tipoDispositivoService.FindAllAsync(),
                 Usuarios = await _usuarioService.FindAllAsync(),
-                Dispositivo = await _dispositivoService.FindByIdAsync(id.Value)
+                Dispositivo = await _dispositivoService.FindByIdAsync(id.Value),
+                Status = await _statusService.Listar()
             };            
             return View(dispositivoViewModel);
         }

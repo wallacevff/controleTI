@@ -3,14 +3,16 @@ using System;
 using ControleTI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ControleTI.Migrations
 {
     [DbContext(typeof(ControleTIContext))]
-    partial class ControleTIContextModelSnapshot : ModelSnapshot
+    [Migration("20210916013731_Status_Relacionamento")]
+    partial class Status_Relacionamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -17,7 +17,7 @@ namespace ControleTI.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Status>> Listar()
+        public async Task<List<Status>> Listar()
         {
             return await _context.Status.ToListAsync();
         }

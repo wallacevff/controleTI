@@ -12,9 +12,9 @@ namespace ControleTI.Models
         public string Nome { get; set; }
         [Display(Name = "Endereço MAC")]
         public string MacAdress { get; set; }
-        public int TipoDispositivoId { get; set; }
+        public int TipoDispositivoId { get; set; }        
         public TipoDispositivo TipoDispositivo { get; set; }
-        public int StatusId { get; set; }
+        public int? StatusId { get; set; }
         public Status Status { get; set; }
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
