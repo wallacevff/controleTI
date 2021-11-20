@@ -4,19 +4,38 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-<form class="navbar-form navbar-right" asp-controller="Dispositivos" asp-action="Pesquisar" method="get">
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Procurar Dispositivo" name="searchString" value="@ViewData["searchString"]">
-        <button type="submit" class="btn glyphicon glyphicon-search"></button>
+<div class="row">
+    <div class="col-md-2 col-lg-2">
+        <a asp-action="Criar" class="btn btn-primary">Adicionar</a>
     </div>
-</form>
+</div>
+
+<div id="pesquisadispositivo">
+    <div class="row " style="margin-top: 20px">
+        <div class="form-group col-md-2">
+            @Html.AntiForgeryToken()
+            <label for="nomeDispositivo">Nome do Dispositivo</label>
+            <input type="text" class="form-control" placeholder="Procurar Dispositivo" name="nomeDispositivo" id="nomeDispositivo">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="nomeUsuario">Nome do Usuário</label>
+            <input type="text" class="form-control" placeholder="Procurar Usuário" name="nomeUsuario" id="nomeUsuario">
+        </div>
+        <!-- <button type="submit" class="btn glyphicon glyphicon-search"></button> -->
+
+    </div>
+</div>
+<!--
 <form class="navbar-form navbar-right" asp-controller="Dispositivos" asp-action="PesquisarUsuario" method="get">
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Nome do Usuário" name="searchString" value="@ViewData["searchString"]">
+        <input type="text" class="form-control" placeholder="Nome do Usuário" name="nomeUsuario" value="@ViewData["nomeUsuario"]">
         <button type="submit" class="btn glyphicon glyphicon-search"></button>
     </div>
 </form>
-<p>
-    <a asp-action="Criar" class="btn btn-primary">Adicionar</a>
-</p>
-<partial name="_ListarDispositivos" model="Model"/>
+-->
+
+<partial name="_ListarDispositivos" model="Model" />
+<script src="~/js/dispositivos/MontaTabelaDispositivos.js"></script>
+<script src="~/js/dispositivos/PesquisaJSON.js"></script>
+<script src="~/js/dispositivos/EventNomeDispositivo.js"></script>
+<script src="~/js/dispositivos/EventNomeUsuario.js"></script>

@@ -72,7 +72,7 @@ namespace ControleTI.Controllers
                 Usuarios = await _usuarioService.FindAllAsync(),
                 Dispositivo = await _dispositivoService.FindByIdAsync(id.Value),
                 Status = await _statusService.Listar()
-            };            
+            };
             return View(dispositivoViewModel);
         }
 
@@ -134,6 +134,41 @@ namespace ControleTI.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View("/Views/Dispositivos/Index.cshtml", dispositivos);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PesquisarJSON(string nomeDispositivo, string nomeUsuario)
+        {
+            IEnumerable<Dispositivo> dispositivos = null;
+            if (!string.IsNullOrEmpty(nomeDispositivo))
+            {
+                dispositivos = await _dispositivoService.PesquisaNome(nomeDispositivo);
+            }
+            else
+            {
+                dispositivos = await _dispositivoService.FindAllAsync();
+            }
+            if (!string.IsNullOrEmpty(nomeUsuario))
+            {
+                if (dispositivos == null)
+                {
+                    dispositivos = await _dispositivoService.PesquisaUsuario(nomeUsuario);
+                }
+                else
+                {
+                    dispositivos = dispositivos.Where(d => d.Usuario.NomeUsu.ToLower().Contains(nomeUsuario.ToLower())).ToList();
+                }
+            }
+
+           
+            /*
+            else
+            {
+                dispositivos = await _dispositivoService.FindAllAsync();
+                return Json(dispositivos.Select(o => new { o.Id, o.Nome, o.TipoDispositivo.Tipo, o.Status, o.Usuario.NomeUsu }));
+            } */
+            return Json(dispositivos.Select(o => new { o.Id, o.Nome, o.TipoDispositivo.Tipo, o.Status, o.Usuario.NomeUsu }));
         }
     }
 }

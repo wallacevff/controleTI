@@ -43,6 +43,8 @@ namespace ControleTI.Models
         {
             DispositivosSoftwares = new HashSet<DispositivoSoftware>();
         }
+   
+        
     }
 
 }

@@ -24,10 +24,10 @@
 
         </tr>
     </thead>
-    <tbody>
+    <tbody id="dispositivoTableBody">
         @foreach (var item in Model)
         {
-        <tr>
+        <tr name="dispositivo">
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
