@@ -21,7 +21,11 @@ namespace ControleTI.Services
 
         public async Task<List<Dispositivo>> FindAllAsync()
         {
-            return await _context.Dispositivo.Include(obj => obj.TipoDispositivo).Include(obj => obj.Usuario).ToListAsync();
+            return await _context.Dispositivo
+                .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Usuario)
+                .Include(obj => obj.Status)
+                .ToListAsync();
         }
 
         public async Task UpdateAsync(Dispositivo dispositivo)
@@ -39,6 +43,7 @@ namespace ControleTI.Services
         {
             return await _context.Dispositivo
                 .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Status)
                 .Include(obj => obj.Usuario)
                 .Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.Software)
                 .Include(obj => obj.DispositivosSoftwares).ThenInclude(obj => obj.SerialKey)
@@ -62,6 +67,7 @@ namespace ControleTI.Services
             return await _context.Dispositivo
                 .Include(obj => obj.Usuario)
                 .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Status)
                 .Where(d => d.Nome.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
         }
         public async Task<List<Dispositivo>> PesquisaUsuario(string pesquisa)
@@ -69,6 +75,7 @@ namespace ControleTI.Services
             return await _context.Dispositivo
                 .Include(obj => obj.Usuario)
                 .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Status)
                 .Where(d => d.Usuario.NomeUsu.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
         }
 
@@ -77,6 +84,7 @@ namespace ControleTI.Services
             return await _context.Dispositivo
                 .Include(obj => obj.Usuario)
                 .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Status)
                 .Where(d => d.TipoDispositivoId == pesquisa)
                 .ToListAsync();
         }

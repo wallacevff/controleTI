@@ -9,6 +9,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20210916013534_Status_Relacionamento.cs" />
     <Compile Remove="Migrations\20210916013534_Status_Relacionamento.Designer.cs" />
+    <Compile Remove="Migrations\20211121040009_DispositivoStatus.cs" />
+    <Compile Remove="Migrations\20211121040009_DispositivoStatus.Designer.cs" />
+    <Compile Remove="Migrations\20211121040555_DispositivoStatus.cs" />
+    <Compile Remove="Migrations\20211121040555_DispositivoStatus.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

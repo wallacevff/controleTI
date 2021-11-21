@@ -137,9 +137,9 @@ namespace ControleTI.Controllers
             }
             return View("/Views/Dispositivos/Index.cshtml", dispositivos);
         }
-
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken] 
         public async Task<IActionResult> PesquisarJSON(string nomeDispositivo, string nomeUsuario, int tipoDispositivoId)
         {
             IEnumerable<Dispositivo> dispositivos = null;
@@ -181,7 +181,7 @@ namespace ControleTI.Controllers
                 dispositivos = await _dispositivoService.FindAllAsync();
                 return Json(dispositivos.Select(o => new { o.Id, o.Nome, o.TipoDispositivo.Tipo, o.Status, o.Usuario.NomeUsu }));
             } */
-            return Json(dispositivos.Select(o => new { o.Id, o.Nome, o.TipoDispositivo.Tipo, o.Status, o.Usuario.NomeUsu }));
+            return Json(dispositivos.Select(o => new { o.Id, o.Nome, o.TipoDispositivo.Tipo, o.Status.StatusNome, o.Usuario.NomeUsu }));
         }
     }
 }

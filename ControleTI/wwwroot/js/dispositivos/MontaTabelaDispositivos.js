@@ -12,7 +12,8 @@
     dispositivoTdTipo.textContent = dispositivo.tipo;
 
     var dispositivoTdStatus = document.createElement("td");
-    dispositivoTdStatus.textContent = dispositivo.status;
+    dispositivoTdStatus.textContent = dispositivo.statusNome;
+    console.log(dispositivo.statusNome);
 
     var dispositivoTdNomeUsu = document.createElement("td");
     dispositivoTdNomeUsu.textContent = dispositivo.nomeUsu;
