@@ -1,6 +1,11 @@
-﻿@model IEnumerable<Dispositivo>
+﻿@model DispositivoViewModel
 @{
     ViewData["Title"] = "Dispositivos";
+}
+@{
+    TipoDispositivo tipoDispositivo = new TipoDispositivo(0, "Todos");
+    var lista = new SelectList(Model.TiposDispositivos.Prepend(tipoDispositivo), "Id", "Tipo");
+    int id = 0;
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -11,15 +16,20 @@
 </div>
 
 <div id="pesquisadispositivo">
-    <div class="row " style="margin-top: 20px">
-        <div class="form-group col-md-2">
+    <div class="row" style="margin-top: 20px">
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
             @Html.AntiForgeryToken()
             <label for="nomeDispositivo">Nome do Dispositivo</label>
             <input type="text" class="form-control" placeholder="Procurar Dispositivo" name="nomeDispositivo" id="nomeDispositivo">
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
             <label for="nomeUsuario">Nome do Usuário</label>
             <input type="text" class="form-control" placeholder="Procurar Usuário" name="nomeUsuario" id="nomeUsuario">
+        </div>
+
+         <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="tipo">Tipo</label>
+            <select asp-items="lista" id="tipoDispositivo" class="form-control"></select>
         </div>
         <!-- <button type="submit" class="btn glyphicon glyphicon-search"></button> -->
 
@@ -34,8 +44,9 @@
 </form>
 -->
 
-<partial name="_ListarDispositivos" model="Model" />
+<partial name="_ListarDispositivos" model="Model.Dispositivos" />
 <script src="~/js/dispositivos/MontaTabelaDispositivos.js"></script>
 <script src="~/js/dispositivos/PesquisaJSON.js"></script>
 <script src="~/js/dispositivos/EventNomeDispositivo.js"></script>
 <script src="~/js/dispositivos/EventNomeUsuario.js"></script>
+<script src="~/js/dispositivos/EventTipoDispositivo.js"></script>

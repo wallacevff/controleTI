@@ -29,16 +29,18 @@ namespace ControleTI.Controllers
             _statusService = statusService;
         }
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index()
         {
+            
             List<Dispositivo> dispositivos = await _dispositivoService.FindAllAsync();
-
-            if (!string.IsNullOrEmpty(searchString))
+            List<TipoDispositivo> tipoDispositivos = await _tipoDispositivoService.FindAllAsync();
+            DispositivoViewModel dispositivosVw = new DispositivoViewModel()
             {
-                dispositivos = await _dispositivoService.PesquisaNome(searchString);
-            }
-
-            return View(dispositivos);
+                Dispositivos = dispositivos,
+                TiposDispositivos = tipoDispositivos
+            };
+         
+            return View(dispositivosVw);
         }
 
 
@@ -138,7 +140,7 @@ namespace ControleTI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PesquisarJSON(string nomeDispositivo, string nomeUsuario)
+        public async Task<IActionResult> PesquisarJSON(string nomeDispositivo, string nomeUsuario, int tipoDispositivoId)
         {
             IEnumerable<Dispositivo> dispositivos = null;
             if (!string.IsNullOrEmpty(nomeDispositivo))
@@ -161,6 +163,17 @@ namespace ControleTI.Controllers
                 }
             }
 
+            if (tipoDispositivoId != 0)
+            {
+                if (dispositivos == null)
+                {
+                    dispositivos = await _dispositivoService.PesquisaTipoDispositivo(tipoDispositivoId);
+                }
+                else
+                {
+                    dispositivos = dispositivos.Where(d => d.TipoDispositivoId == tipoDispositivoId).ToList();
+                }
+            }
            
             /*
             else
