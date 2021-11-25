@@ -9,7 +9,7 @@ using ControleTI.Models.ViewModels;
 using ControleTI.Data;
 using Microsoft.EntityFrameworkCore;
 
-
+/* */
 namespace ControleTI.Controllers
 {
     public class SerialKeysController : Controller
