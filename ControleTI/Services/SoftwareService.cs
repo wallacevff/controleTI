@@ -3,7 +3,7 @@ using ControleTI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Linq;
 
 
 namespace ControleTI.Services
@@ -54,6 +54,12 @@ namespace ControleTI.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Software>> FindAssync(string nomeSoftware)
+        {
+            return await _context.Software
+                .Where(obj => obj.Nome.Contains(nomeSoftware))
+                .ToListAsync();
+        }
 
     }
 }

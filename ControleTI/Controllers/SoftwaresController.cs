@@ -74,5 +74,19 @@ namespace ControleTI.Controllers
             var software = await _softwareService.FindByIdAsync(id.Value);
             return View(software);
         }
+
+
+        public async Task<IActionResult> PesquisarJSON(string nomeSoftware)
+        {
+            List<Software> softwares;
+            if (string.IsNullOrEmpty(nomeSoftware))
+            {
+                softwares = await _softwareService.FindAllAsync();
+                return Json(softwares.Select(o => new { o.Id, o.Nome }));
+            }
+            softwares = await _softwareService.FindAssync(nomeSoftware);
+            return Json(softwares.Select(o => new { o.Id, o.Nome}));
+        }
+
     }
 }
