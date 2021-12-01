@@ -1,10 +1,51 @@
-﻿@model IEnumerable<Usuario>
+﻿@model UsuarioViewModel
 @{
     ViewData["Title"] = "Usuários";
 }
 
+@{
+    Setor setor = new Setor(0, "Todos");
+    var lista = new SelectList(Model.Setores.Prepend(setor), "Id", "Nome");
+    Filial filial = new Filial(0, "Todas");
+    var filiais = new SelectList(Model.Filiais.Prepend(filial), "Id", "Nome");
+}
+
+
 <h2>@ViewData["Title"]</h2>
 <p>
-    <a asp-action="Criar" class="btn btn-success">Adicionar</a>
+    <a asp-action="Criar" class="btn btn-primary">Adicionar</a>
 </p>
-<partial name="_ListarUsuarioPartial" model="Model" />
+<div id="pesquisausuario">
+    <div class="row" style="margin-top: 20px">
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            @Html.AntiForgeryToken()
+            <label for="nomeUsuario">Nome do Usuário</label>
+            <input type="text" class="form-control" placeholder="Procurar Usuario" name="nomeUsuario" id="nomeUsuario">
+        </div>
+
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="NomeCompleto">Nome Completo</label>
+            <input type="text" class="form-control" placeholder="Procurar Nome" name="nomeCompleto" id="nomeCompleto">
+        </div>
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="tipo">Setor</label>
+            <select asp-items="lista" id="setor" class="form-control"></select>
+        </div>
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="filial">Filial</label>
+            <select asp-items="filiais" id="filial" class="form-control"></select>
+        </div>
+        <!-- <button type="submit" class="btn glyphicon glyphicon-search"></button> -->
+
+    </div>
+</div>
+
+<partial name="_ListarUsuarioPartial" model="Model.Usuarios" />
+
+
+<script src=~/js/usuarios/PesquisaJSON.js></script>
+<script src=~/js/usuarios/EventNomeUsuario.js></script>
+<script src=~/js/usuarios/EventNomeCompleto.js></script>
+<script src=~/js/usuarios/EventSetor.js></script>
+<script src=~/js/usuarios/EventFilial.js></script>
+<script src=~/js/usuarios/MontaTabelaUsuario.js></script>

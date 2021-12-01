@@ -14,16 +14,19 @@
             <th>
                 Setor
             </th>
+             <th>
+                Filial
+            </th>
             <th></th>
             <th></th>
             <th></th>
 
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tableUsuario">
         @foreach (var item in Model)
         {
-        <tr>
+        <tr name="Usuario">
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
@@ -36,7 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Setor.Nome)
             </td>
-           
+            <td>
+                @Html.DisplayFor(modelItem => item.Filial.Nome)
+            </td>
             <td>
                 <a asp-action="Editar" class="btn btn-brown" asp-route-id="@item.Id">Editar</a>
             </td>

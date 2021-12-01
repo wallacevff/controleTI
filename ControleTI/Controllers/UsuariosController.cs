@@ -26,7 +26,13 @@ namespace ControleTI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View( await _usuarioService.FindAllAsync());
+            var viewModel = new UsuarioViewModel
+            {
+                Setores = await _setorService.FindAllAsync(),
+                Filiais = await _filialContext.Filial.ToListAsync(),
+                Usuarios = await _usuarioService.FindAllAsync()
+            };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Criar()
@@ -95,6 +101,57 @@ namespace ControleTI.Controllers
         {
             await _usuarioService.Delete(usuario);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> PesquisarJSON(string nomeUsuario, string nomeCompleto, int setor, int filial)
+        {
+            List<Usuario> usuarios; usuarios = null;
+            if (!string.IsNullOrEmpty(nomeUsuario))
+            {
+                //usuarios = await _usuarioService.FindAllAsync();
+                usuarios = await _usuarioService.FindByNameAsync(nomeUsuario);
+                // return Json(usuarios.Select(o => new { o.Id, o.NomeUsu, o.NomeCompleto, Setor = o.Setor.Nome, Filial = o.Filial.Nome}));
+            }
+            if (!string.IsNullOrEmpty(nomeCompleto))
+            {
+                if(usuarios == null)
+                {
+                    usuarios = await _usuarioService.PesquisarNomeCompleto(nomeCompleto);
+                }
+                else
+                {
+                    usuarios = usuarios.Where(obj => obj.NomeCompleto.ToLower().Contains(nomeCompleto.ToLower())).ToList();
+                }
+                
+            }
+            if (setor != 0)
+            {
+                if (usuarios == null)
+                {
+                    usuarios = await _usuarioService.PesquisarSetor(setor);
+                }
+                else
+                {
+                    usuarios = usuarios.Where(obj => obj.SetorId == setor).ToList();
+                }
+            }
+            if (filial != 0)
+            {
+                if (usuarios == null)
+                {
+                    usuarios = await _usuarioService.PesquisarFilial(filial);
+                }
+                else
+                {
+                    usuarios = usuarios.Where(obj => obj.FilialId == filial).ToList();
+                }
+            }
+            if (usuarios == null)
+            {
+                usuarios = await _usuarioService.FindAllAsync();
+            }
+            
+            return Json(usuarios.Select(o => new { o.Id, o.NomeUsu, o.NomeCompleto, Setor = o.Setor.Nome, Filial =  o.Filial.Nome }));
         }
     }
 }

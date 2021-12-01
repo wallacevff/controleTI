@@ -11,5 +11,6 @@ namespace ControleTI.Models.ViewModels
         public Usuario Usuario { set; get; }
         public List<Setor> Setores { get; set; }
         public List<Filial> Filiais { get; set; }
+        public List<Usuario> Usuarios { get; set; }
     }
 }
