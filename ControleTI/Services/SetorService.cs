@@ -52,6 +52,13 @@ namespace ControleTI.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Setor>> PesquisarNome(string nome)
+        {
+            return await _context.Setor
+                .Where(obj => obj.Nome.ToLower().Contains(nome.ToLower()))
+                .ToListAsync();
+        }
+
 
     }
 }

@@ -5,44 +5,21 @@
 
 <h2>@ViewData["Title"]</h2>
 <p>
-    <a asp-action="Criar" class="btn btn-success">Adicionar</a>
+    <a asp-action="Criar" class="btn btn-primary">Adicionar</a>
 </p>
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr class="well">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th></th>
-            <th></th>
-            <th></th>
+<div id="pesquisarSetor">
+    <div class="row" style="margin-top: 20px">
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            @Html.AntiForgeryToken()
+            <label for="nomeSetor">Nome do Setor</label>
+            <input type="text" class="form-control" placeholder="Procurar Setor" name="nomeSetor" id="nomeSetor">
+        </div>
+        <!-- <button type="submit" class="btn glyphicon glyphicon-search"></button> -->
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-
-                <td>
-                    <a asp-action="Editar" class="btn btn-primary" asp-route-id="@item.Id">Editar</a>
-                </td>
-                <td>
-                    <a asp-action="Detalhes" class="btn btn-warning"  asp-route-id="@item.Id">Detalhes</a>
-                </td>
-                <td>
-                    <a asp-action="Excluir" class="btn btn-danger"  asp-route-id="@item.Id">Apagar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    </div>
+</div>
+<partial name="_ListarSetoresPartial" model="Model" />
+<script src="~/js/setores/PesquisaJSON.js"></script>
+<script src="~/js/setores/EventNomeSetor.js"></script>
+<script src="~/js/setores/MontaTabelaSetor.js"></script>

@@ -76,5 +76,19 @@ namespace ControleTI.Controllers
             return View(setor);
         }
 
+        public async Task<IActionResult> PesquisarJSON(string nomeSetor)
+        {
+            List<Setor> setores = null;
+            if (!string.IsNullOrEmpty(nomeSetor))
+            {
+                setores = await _setorService.PesquisarNome(nomeSetor);
+            }
+            else
+            {
+                setores = await _setorService.FindAllAsync();
+            }
+            return Json(setores.Select(obj => new { id = obj.Id, nome = obj.Nome}));
+        }
+
     }
 }
