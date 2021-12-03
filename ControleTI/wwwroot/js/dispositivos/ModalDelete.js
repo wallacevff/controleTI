@@ -43,7 +43,7 @@ function apagarModal() {
 }
 
 function deletarSoftawre(id) {
-    
+    apagarModal();
     var token = document.querySelector("input[name=__RequestVerificationToken]");
    /// console.log(token);
     var tr = document.querySelector(`#soft-${id}`);

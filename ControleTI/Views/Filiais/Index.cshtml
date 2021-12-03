@@ -7,6 +7,22 @@
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Adicionar</a>
+    <a asp-action="Create" class="btn bg-primary">Adicionar</a>
 </p>
+<div id="pesquisarFilial">
+    <div class="row" style="margin-top: 20px">
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            @Html.AntiForgeryToken()
+            <label for="nomeFilial">Nome do Setor</label>
+            <input type="text" class="form-control" placeholder="Procurar Filial" name="nomeFilial" id="nomeFilial">
+        </div>
+        <!-- <button type="submit" class="btn glyphicon glyphicon-search"></button> -->
+
+    </div>
+</div>
+
 <partial name="_ListarFiliaisPartial" model="Model" />
+
+<script src="~/js/filiais/PesquisaJSON.js"></script>
+<script src="~/js/filiais/MontaTabelaFilial.js"></script>
+<script src="~/js/filiais/EventNomeFilial.js"></script>

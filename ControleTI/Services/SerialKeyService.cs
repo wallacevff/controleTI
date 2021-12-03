@@ -70,10 +70,76 @@ namespace ControleTI.Services
         public async Task<List<SerialKey>> PesquisaSoftware(string pesquisa)
         {
             return await _context.SerialKey
-                .Include(obj => obj.Software)                
+                .Include(obj => obj.Software)
                 .Where(d => d.Software.Nome.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
         }
 
+        public async Task<List<SerialKey>> Pesquisar(string serialKey, string software, bool? restantes)
+        {
+            List<SerialKey> serialKeys = null;
+            if (!string.IsNullOrEmpty(serialKey))
+            {
+                serialKeys = await _context.SerialKey
+                    .Include(obj => obj.Software)
+                    .Where(d => d.Key.ToLower().Contains(serialKey.ToLower()))
+                    .ToListAsync();
+            }
+            if (!string.IsNullOrEmpty(software))
+            {
+                if (serialKeys == null)
+                {
+                    serialKeys = await _context.SerialKey
+                    .Include(obj => obj.Software)
+                    .Where(d => d.Software.Nome.ToLower().Contains(software.ToLower()))
+                    .ToListAsync();
+                }
+                else
+                {
+                    serialKeys = serialKeys
+                        .Where(d => d.Software.Nome.ToLower().Contains(software.ToLower()))
+                        .ToList();
+                }
 
+            }
+            if (restantes != null)
+            {
+                if (serialKeys == null && restantes == true)
+                {
+                    serialKeys = await _context.SerialKey
+                    .Include(obj => obj.Software)
+                    .Where(d => d.Restantes > 0)
+                    .ToListAsync();
+                }
+                if (serialKeys == null && restantes == false)
+                {
+                    serialKeys = await _context.SerialKey
+                    .Include(obj => obj.Software)
+                    .Where(d => d.Restantes == 0)
+                    .ToListAsync();
+                }
+                if (serialKeys != null && restantes == true)
+                {
+                    serialKeys = serialKeys
+                    .Where(d => d.Restantes > 0)
+                    .ToList();
+                }
+                if (serialKeys != null && restantes == false)
+                {
+                    serialKeys = serialKeys
+                    .Where(d => d.Restantes == 0)
+                    .ToList();
+                }
+            }
+
+            if (serialKeys == null)
+            {
+                serialKeys =  await _context
+                    .SerialKey
+                    .Include(obj => obj.Software)
+                    .ToListAsync();
+            }
+
+            return serialKeys;
+        }
     }
 }

@@ -60,6 +60,5 @@ namespace ControleTI.Services
                 .Where(obj => obj.Nome.Contains(nomeSoftware))
                 .ToListAsync();
         }
-
     }
 }

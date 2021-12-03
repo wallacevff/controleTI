@@ -1,23 +1,45 @@
 ﻿@model IEnumerable<SerialKey>
 @{
     ViewData["Title"] = "Serial Keys";
+
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form class="navbar-form navbar-right" asp-controller="SerialKeys" asp-action="Pesquisar" method="get">
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Procurar Serial Key" name="searchString" value="@ViewData["searchString"]">
-        <button type="submit" class="btn glyphicon glyphicon-search"></button>
+
+
+
+<a asp-action="Criar" class="btn btn-primary">Adicionar</a>
+
+<div id="pesquisaSerialKey">
+    <div class="row" style="margin-top: 20px">
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            @Html.AntiForgeryToken()
+            <label for="serialKey">Serial Key</label>
+            <input type="text" class="form-control" placeholder="Procurar Serial Key" name="serialKey" id="serialKey">
+        </div>
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="software">Nome do Software</label>
+            <input type="text" class="form-control" placeholder="Procurar Software" name="software" id="software">
+        </div>
+
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="tipo">Disponibilidade</label>
+            <select name="select" id="disponibilidade" class="form-control">
+                <option value="0" selected>Todas</option>
+                <option value="1">Disponíveis</option>
+                <option value="2">Esgotadas</option>
+            </select>
+        </div>
+        <!-- <button type="submit" class="btn glyphicon glyphicon-search"></button> -->
+
     </div>
-</form>
-<form class="navbar-form navbar-right" asp-controller="SerialKeys" asp-action="PesquisarSoftware" method="get">
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Nome do software" name="searchString" value="@ViewData["searchString"]">
-        <button type="submit" class="btn glyphicon glyphicon-search"></button>
-    </div>
-</form>
-<p>
-    <a asp-action="Criar" class="btn btn-success">Adicionar</a>
-</p>
+</div>
+
 <partial name="_ListarSerialKeysPartial" model="Model" />
+
+<script src="~/js/serialKeys/PesquisaJSON.js"></script>
+<script src="~/js/serialKeys/EventSerialKey.js"></script>
+<script src="~/js/serialKeys/MontaTabelaSerialKey.js"></script>
+<script src="~/js/serialKeys/EventSoftware.js"></script> EventDisponibilidade
+<script src="~/js/serialKeys/EventDisponibilidade.js"></script>

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using ControleTI.Services;
 using ControleTI.Models;
 using ControleTI.Models.ViewModels;
-using ControleTI.Data;
-using Microsoft.EntityFrameworkCore;
+
 
 /* */
 namespace ControleTI.Controllers
@@ -88,7 +87,7 @@ namespace ControleTI.Controllers
         {
             List<DispositivoSoftware> dispositivoSoftwares = await _dispositivoSoftwareService.FindByKeyIdAsync(serialKey.Id);
 
-            if(!(dispositivoSoftwares == null))
+            if (!(dispositivoSoftwares == null))
             {
                 foreach (DispositivoSoftware ds in dispositivoSoftwares)
                 {
@@ -96,7 +95,7 @@ namespace ControleTI.Controllers
                     await _dispositivoSoftwareService.UpdateAsync(ds);
                 }
             }
-            
+
             await _serialKeyService.Delete(serialKey);
             return RedirectToAction(nameof(Index));
         }
@@ -108,33 +107,43 @@ namespace ControleTI.Controllers
             return View(serialKey);
         }
 
-        public async Task<IActionResult> Pesquisar(string searchString)
+
+        public async Task<IActionResult> PesquisarJSON(string serialKey, string software, bool? restantes)
         {
-            IEnumerable<SerialKey> serialKeys;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                serialKeys = await _serialKeyService.PesquisaNome(searchString);
-            }
-            else
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return View("~/Views/SerialKeys/Index.cshtml", serialKeys);
+            List<SerialKey> serialKeys = await _serialKeyService.Pesquisar(serialKey, software, restantes);
+            return Json(serialKeys.Select(obj => new { obj.Id, nomeSoftware = obj.Software.Nome, obj.Key, obj.Quantidade, obj.Utilizadas, obj.Restantes }));
         }
 
-        public async Task<IActionResult> PesquisarSoftware(string searchString)
-        {
-            IEnumerable<SerialKey> serialKeys;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                serialKeys = await _serialKeyService.PesquisaSoftware(searchString);
-            }
-            else
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return View("~/Views/SerialKeys/Index.cshtml", serialKeys);
-        }
 
+        //Protótipos Pesquisa _-----------------------------------------------------------
+
+
+        //public async Task<IActionResult> Pesquisar(string searchString)
+        //{
+        //    IEnumerable<SerialKey> serialKeys;
+        //    if (!string.IsNullOrEmpty(searchString))
+        //    {
+        //        serialKeys = await _serialKeyService.PesquisaNome(searchString);
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View("~/Views/SerialKeys/Index.cshtml", serialKeys);
+        //}
+
+        //public async Task<IActionResult> PesquisarSoftware(string searchString)
+        //{
+        //    IEnumerable<SerialKey> serialKeys;
+        //    if (!string.IsNullOrEmpty(searchString))
+        //    {
+        //        serialKeys = await _serialKeyService.PesquisaSoftware(searchString);
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View("~/Views/SerialKeys/Index.cshtml", serialKeys);
+        //}
     }
 }

@@ -27,10 +27,10 @@
 
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tableSerialKey">
         @foreach (var item in Model)
         {
-            <tr>
+            <tr name="SerialKey">
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
@@ -51,7 +51,7 @@
                 </td>
 
                 <td>
-                    <a asp-action="Editar" class="btn btn-primary" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Editar" class="btn btn-brown" asp-route-id="@item.Id">Editar</a>
                 </td>
                 <td>
                     <a asp-action="Detalhes" class="btn btn-info" asp-route-id="@item.Id">Detalhes</a>

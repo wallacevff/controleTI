@@ -11,9 +11,9 @@
             <th></th><th></th><th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tableFilial">
 @foreach (var item in Model) {
-        <tr>
+        <tr name="Filial">
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
@@ -21,10 +21,10 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-brown">Editar</a>
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Detalhes</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Detalhes</a>
             </td>
             <td>
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>

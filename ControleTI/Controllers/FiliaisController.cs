@@ -149,5 +149,24 @@ namespace ControleTI.Controllers
         {
             return _context.Filial.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> PesquisarJSON(string nomeFilial)
+        {
+            List<Filial> filiais = null;
+            if (string.IsNullOrEmpty(nomeFilial))
+            {
+                filiais = await _context.Filial.ToListAsync();
+                return Json(filiais);
+            }
+            filiais = await _context.Filial
+                .Where(obj => obj.Nome
+                        .ToLower()
+                        .Contains(nomeFilial
+                            .ToLower()
+                            )
+                        )
+                .ToListAsync();
+            return Json(filiais);
+        }
     }
 }
