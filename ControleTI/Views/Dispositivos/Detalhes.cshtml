@@ -4,7 +4,7 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-
+@Html.AntiForgeryToken()
 <div>
     <h4>Dispositivo</h4>
     <hr />
@@ -92,7 +92,7 @@
         <tbody>
             @foreach (var item in Model.DispositivosSoftwares)
             {
-                <tr>
+                <tr id="soft-@item.Id">
                     <td>
                         @Html.DisplayFor(usu => item.Software.Nome)
                     </td>
@@ -113,17 +113,27 @@
                         @if (item.SerialKeyId != null)
                         {
                             @if (item.IdInstalacao == null)
-                            {<a asp-controller="DispositivoSoftwares" asp-action="CadastrarIdInstalacao" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar</a>}
+                            {
+                                <a asp-controller="DispositivoSoftwares" asp-action="CadastrarIdInstalacao" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar</a>
+                            }
 
                             @Html.DisplayFor(modelItem => item.IdInstalacao)
                         }
                     </td>
                     <td>
-                        <a asp-controller="DispositivoSoftwares" asp-action="Apagar" class="btn btn-danger" asp-route-id="@item.Id">Apagar</a>
-                    </td>
+
+                        <button type="button" class="btn btn-danger" onclick="modalDelete(@item.Id, '@item.Software.Nome')" data-toggle="modal" data-target="#modalApagar">
+                            Apagar
+                        </button>
+                        <partial name="_ApagarSoftwarePartial" model="item"/>
+
+                        <!-- <a asp-controller="DispositivoSoftwares"  asp-action="Apagar" class="btn btn-danger" asp-route-id="@item.Id">Del</a> -->
+                </td>
+
                 </tr>
             }
         </tbody>
     </table>
-
+    <script src=~/js/dispositivos/ModalDelete.js></script>
+    
 </div>

@@ -17,7 +17,7 @@
                 <a href="/Setores/Detalhes/${setor.id}" class="btn btn-info" asp-route-id="@item.Id">Detalhes</a>
             </td>
             <td>
-                <a href="/Setores/Detalhes/${setor.id}" class="btn btn-danger">Apagar</a>
+                <a href="/Setores/Excluir/${setor.id}" class="btn btn-danger">Apagar</a>
             </td>
         </tr>  
         `);

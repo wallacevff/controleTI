@@ -126,13 +126,9 @@ namespace ControleTI.Controllers
 
 
 
-
-
-
-
-
-        [HttpGet]
-        public async Task<IActionResult> Apagar(int id)
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task Apagar(int id)
         {
             DispositivoSoftware dispositivoSoftware = await _dispositivoSoftwareService.FindByIdAsync(id);
             if (dispositivoSoftware.SerialKeyId != null)
@@ -143,7 +139,8 @@ namespace ControleTI.Controllers
             }
             
             await _dispositivoSoftwareService.Delete(dispositivoSoftware);
-            return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
+            
+           // return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }
 
 
