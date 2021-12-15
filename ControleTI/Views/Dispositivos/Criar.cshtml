@@ -14,7 +14,7 @@
                 <label asp-for="Dispositivo.TipoDispositivoId" class="control-label">Tipo de Dispositivo</label>
                 <select asp-for="Dispositivo.TipoDispositivoId" asp-items="@(new SelectList(Model.TiposDispositivos,"Id","Tipo"))" class="form-control"></select>
                 <label asp-for="Dispositivo.StatusId" class="control-label">Status</label>
-                <select asp-for="Dispositivo.StatusId" asp-items="@(new SelectList(Model.Status,"StatusId","StatusNome"))" class="form-control"></select>
+                <select asp-for="Dispositivo.StatusId" asp-items="@(new SelectList(Model.Statuses,"StatusId","StatusNome"))" class="form-control"></select>
                 <label asp-for="Dispositivo.MacAdress" class="control-label">Endereço MAC</label>
                 <input asp-for="Dispositivo.MacAdress" class="form-control" />
                 <label asp-for="Dispositivo.UsuarioId" class="control-label">Usuário</label>

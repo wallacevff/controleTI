@@ -5,10 +5,10 @@
             <td>
                 ${SerialKey.id}
             </td>
-            <td>
+            <td id='nomeSoftware-${SerialKey.id}'>
                 ${SerialKey.nomeSoftware}
             </td>
-            <td>
+            <td id='serialkey-${SerialKey.id}'>
                 ${SerialKey.key}
             </td>
             <td>
@@ -33,4 +33,16 @@
             </td>
         </tr>  
         `);
+
+
+    var serialKey = tableBody.querySelector(`#serialkey-${SerialKey.id}`);
+    if (SerialKey.key) {
+        serialKey.textContent = SerialKey.key;
+    }
+    var nomeSoftware = tableBody.querySelector(`#nomeSoftware-${SerialKey.id}`);
+    //console.log(nomeSoftware)
+    if (SerialKey.nomeSoftware) {
+        nomeSoftware.textContent = SerialKey.nomeSoftware;
+    }
+    
 }

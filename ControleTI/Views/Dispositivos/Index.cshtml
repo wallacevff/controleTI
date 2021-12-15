@@ -5,7 +5,12 @@
 @{
     TipoDispositivo tipoDispositivo = new TipoDispositivo(0, "Todos");
     var lista = new SelectList(Model.TiposDispositivos.Prepend(tipoDispositivo), "Id", "Tipo");
-    int id = 0;
+    Status statusDispositivo = new Status(0, "Todos");
+    var listaStatus = new SelectList(Model.Statuses.Prepend(statusDispositivo), "StatusId", "StatusNome");
+    Setor setorDispositivo = new Setor(0, "Todos");
+    var listaSetor = new SelectList(Model.Setores.Prepend(setorDispositivo), "Id", "Nome");
+    Filial filialDispositivo = new Filial(0, "Todas");
+    var listaFilial = new SelectList(Model.Filiais.Prepend(filialDispositivo), "Id", "Nome");
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -27,9 +32,23 @@
             <input type="text" class="form-control" placeholder="Procurar Usuário" name="nomeUsuario" id="nomeUsuario">
         </div>
 
-         <div class="form-group col-md-2 col-lg-2 col-sm-2">
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
             <label for="tipo">Tipo</label>
             <select asp-items="lista" id="tipoDispositivo" class="form-control"></select>
+        </div>
+
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="status">Status</label>
+           <select asp-items="listaStatus" id="statusDispositivo" class="form-control"></select>
+        </div>
+
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="setor">Setor</label>
+            <select asp-items="listaSetor" id="setorDispositivo" class="form-control"></select>
+        </div>
+        <div class="form-group col-md-2 col-lg-2 col-sm-2">
+            <label for="filial">Filial</label>
+            <select asp-items="listaFilial" id="filialDispositivo" class="form-control"></select>
         </div>
         <!-- <button type="submit" class="btn glyphicon glyphicon-search"></button> -->
 
@@ -50,3 +69,6 @@
 <script src="~/js/dispositivos/EventNomeDispositivo.js"></script>
 <script src="~/js/dispositivos/EventNomeUsuario.js"></script>
 <script src="~/js/dispositivos/EventTipoDispositivo.js"></script>
+<script src="~/js/dispositivos/EventStatusDispositivo.js"></script>
+<script src="~/js/dispositivos/EventSetorDispositivo.js"></script>
+<script src="~/js/dispositivos/EventFilialDispositivo.js"></script>

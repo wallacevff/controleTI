@@ -88,5 +88,35 @@ namespace ControleTI.Services
                 .Where(d => d.TipoDispositivoId == pesquisa)
                 .ToListAsync();
         }
+
+        public async Task<List<Dispositivo>> PesquisaStatusDispositivo(int pesquisa)
+        {
+            return await _context.Dispositivo
+                .Include(obj => obj.Usuario)
+                .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Status)
+                .Where(d => d.StatusId == pesquisa)
+                .ToListAsync();
+        }
+
+        public async Task<List<Dispositivo>> PesquisaSetorDispositovo(int pesquisa)
+        {
+            return await _context.Dispositivo
+                .Include(obj => obj.Usuario)
+                .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Status)
+                .Where(d => d.Usuario.SetorId == pesquisa)
+                .ToListAsync();
+        }
+
+        public async Task<List<Dispositivo>> PesquisaFilialDispositovo(int pesquisa)
+        {
+            return await _context.Dispositivo
+                .Include(obj => obj.Usuario)
+                .Include(obj => obj.TipoDispositivo)
+                .Include(obj => obj.Status)
+                .Where(d => d.Usuario.FilialId == pesquisa)
+                .ToListAsync();
+        }
     }
 }

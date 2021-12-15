@@ -5,17 +5,17 @@
             <td>
                 ${usuario.id}
             </td>
-            <td>
+            <td id='nomeUsuario-${usuario.id}'>
                 ${usuario.nomeUsu}
             </td>
-            <td>
+            <td id='nomeCompleto-${usuario.id}'>
                 ${usuario.nomeCompleto}
             </td>
-            <td>
+            <td id='setor-${usuario.id}'>
                 ${usuario.setor}
             </td>
 
-            <td>
+            <td id='filial-${usuario.id}'>
                 ${usuario.filial}
             </td>
     
@@ -30,4 +30,17 @@
             </td>
         </tr>  
         `);
+
+    var nomeUsuario = tableBody.querySelector(`#nomeUsuario-${usuario.id}`);
+    var nomeCompleto = tableBody.querySelector(`#nomeCompleto-${usuario.id}`);
+    var setor = tableBody.querySelector(`#setor-${usuario.id}`);
+    var filial = tableBody.querySelector(`#filial-${usuario.id}`);
+    if (usuario.nomeUsu) {
+        nomeUsuario.textContent = usuario.nomeUsu;
+    }
+    if (usuario.nomeCompleto) {
+        nomeCompleto.textContent = usuario.nomeCompleto;
+    }
+    setor.textContent = usuario.setor;
+    filial.textContent = usuario.filial;
 }

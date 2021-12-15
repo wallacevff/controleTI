@@ -5,11 +5,11 @@
             <td>
                 ${setor.id}
             </td>
-            <td>
+            <td id='nomeSetor-${setor.id}'>
                 ${setor.nome}
             </td>
             
-    
+            
             <td>
                 <a href="/Setores/Editar/${setor.id}" class="btn btn-brown" asp-route-id="@item.Id">Editar</a>
             </td>
@@ -21,4 +21,7 @@
             </td>
         </tr>  
         `);
+
+    var setorNome = tableBody.querySelector(`#nomeSetor-${setor.id}`);
+    setorNome.textContent = setor.nome;
 }

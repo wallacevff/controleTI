@@ -5,6 +5,8 @@ using ControleTI.Models;
 using ControleTI.Models.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using ControleTI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ControleTI.Controllers
 {
@@ -16,10 +18,12 @@ namespace ControleTI.Controllers
         private readonly SoftwareService _softwareService;
         private readonly SerialKeyService _serialKeyService;
         private readonly StatusService _statusService;
+        private readonly SetorService _setorService;
+        private readonly ControleTIContext _controleTIContext;
 
         public DispositivosController(DispositivoService dispositivoService, UsuarioService usuarioService,
             TipoDispositivoService tipoDispositivoService, SoftwareService softwareService, SerialKeyService serialKeyService,
-            StatusService statusService)
+            StatusService statusService, SetorService setorService, ControleTIContext controleTIContext)
         {
             _dispositivoService = dispositivoService;
             _usuarioService = usuarioService;
@@ -27,6 +31,8 @@ namespace ControleTI.Controllers
             _softwareService = softwareService;
             _serialKeyService = serialKeyService;
             _statusService = statusService;
+            _setorService = setorService;
+            _controleTIContext = controleTIContext;
         }
 
         public async Task<IActionResult> Index()
@@ -34,10 +40,16 @@ namespace ControleTI.Controllers
             
             List<Dispositivo> dispositivos = await _dispositivoService.FindAllAsync();
             List<TipoDispositivo> tipoDispositivos = await _tipoDispositivoService.FindAllAsync();
+            List<Status> statuses = await _statusService.Listar();
+            List<Setor> setores = await _setorService.FindAllAsync();
+            List<Filial> filials = await _controleTIContext.Filial.ToListAsync();
             DispositivoViewModel dispositivosVw = new DispositivoViewModel()
             {
                 Dispositivos = dispositivos,
-                TiposDispositivos = tipoDispositivos
+                TiposDispositivos = tipoDispositivos,
+                Statuses = statuses,
+                Setores = setores,
+                Filiais = filials
             };
          
             return View(dispositivosVw);
@@ -53,7 +65,7 @@ namespace ControleTI.Controllers
             {
                 TiposDispositivos = tiposDispositivos,
                 Usuarios = usarios,
-                Status = status
+                Statuses = status
             };
             return View(dispositivoViewModel);
         }
@@ -73,7 +85,7 @@ namespace ControleTI.Controllers
                 TiposDispositivos = await _tipoDispositivoService.FindAllAsync(),
                 Usuarios = await _usuarioService.FindAllAsync(),
                 Dispositivo = await _dispositivoService.FindByIdAsync(id.Value),
-                Status = await _statusService.Listar()
+                Statuses = await _statusService.Listar()
             };
             return View(dispositivoViewModel);
         }
@@ -140,7 +152,10 @@ namespace ControleTI.Controllers
         
         [HttpPost]
         //[ValidateAntiForgeryToken] 
-        public async Task<IActionResult> PesquisarJSON(string nomeDispositivo, string nomeUsuario, int tipoDispositivoId)
+        public async Task<IActionResult> PesquisarJSON(
+            string nomeDispositivo, string nomeUsuario, int tipoDispositivoId,
+            int statusId, int setorId, int filialId
+            )
         {
             IEnumerable<Dispositivo> dispositivos = null;
             if (!string.IsNullOrEmpty(nomeDispositivo))
@@ -174,7 +189,43 @@ namespace ControleTI.Controllers
                     dispositivos = dispositivos.Where(d => d.TipoDispositivoId == tipoDispositivoId).ToList();
                 }
             }
-           
+
+            if (statusId != 0)
+            {
+                if (dispositivos == null)
+                {
+                    dispositivos = await _dispositivoService.PesquisaStatusDispositivo(statusId);
+                }
+                else
+                {
+                    dispositivos = dispositivos.Where(d => d.StatusId == statusId).ToList();
+                }
+            }
+
+            if (setorId != 0)
+            {
+                if (dispositivos == null)
+                {
+                    dispositivos = await _dispositivoService.PesquisaSetorDispositovo(setorId);
+                }
+                else
+                {
+                    dispositivos = dispositivos.Where(d => d.Usuario.SetorId == setorId).ToList();
+                }
+            }
+
+            if (filialId != 0)
+            {
+                if (dispositivos == null)
+                {
+                    dispositivos = await _dispositivoService.PesquisaFilialDispositovo(filialId);
+                }
+                else
+                {
+                    dispositivos = dispositivos.Where(d => d.Usuario.FilialId == filialId).ToList();
+                }
+            }
+
             /*
             else
             {
