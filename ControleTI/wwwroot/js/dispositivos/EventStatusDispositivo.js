@@ -1,4 +1,4 @@
-﻿tipoDispositivo.addEventListener("input", function () {
+﻿statusDispositivo.addEventListener("input", function () {
 
     if (!this.value) {
         this.value = 0;
@@ -27,7 +27,7 @@
     form.append("statusId", this.value);
     form.append("setorId", setorDispositivo.value);
     form.append("filialId", filialDispositivo.value);
-
+    console.log(this.value);
     const url = "/Dispositivos/PesquisarJSON";
     fetch(url, {
         body: form,
