@@ -33,7 +33,7 @@ function modalDelete(id, nome) {
     div.appendChild(modal);
     //show.removeAttribute("aria-hidden");
     
-    console.log(modal);
+    //console.log(modal);
     //div.removeChild(modal);
 }
 
