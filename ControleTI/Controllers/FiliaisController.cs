@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ControleTI.Data;
 using ControleTI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleTI.Controllers
 {
+    [Authorize]
     public class FiliaisController : Controller
     {
         private readonly ControleTIContext _context;

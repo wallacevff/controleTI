@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ControleTI;
 using ControleTI.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using ControleTI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleTI.Controllers
 {
+    [Authorize]
     public class SetoresController : Controller
     {
         private readonly SetorService _setorService;

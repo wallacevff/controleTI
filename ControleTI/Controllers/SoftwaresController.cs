@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using ControleTI.Services;
 using ControleTI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleTI.Controllers
 {
+    [Authorize]
     public class SoftwaresController : Controller
     {
         private readonly SerialKeyService _serialKeysService;

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,10 +7,11 @@ using ControleTI.Models.ViewModels;
 using ControleTI.Models;
 using ControleTI.Data;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleTI.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly UsuarioService _usuarioService;

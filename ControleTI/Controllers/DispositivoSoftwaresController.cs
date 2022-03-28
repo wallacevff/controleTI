@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ControleTI.Services;
 using ControleTI.Models;
 using ControleTI.Models.ViewModels;
-using ControleTI.Data;
-using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleTI.Controllers
 {
+    [Authorize]
     public class DispositivoSoftwaresController : Controller
     {
         private readonly DispositivoService _dispositivoService;

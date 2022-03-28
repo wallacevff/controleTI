@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using ControleTI.Services;
 using ControleTI.Models;
 using ControleTI.Models.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 
 /* */
 namespace ControleTI.Controllers
 {
+    [Authorize]
     public class SerialKeysController : Controller
     {
         private readonly SerialKeyService _serialKeyService;

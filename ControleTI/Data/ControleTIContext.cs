@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ControleTI.Models;
 
 namespace ControleTI.Data
 {
-    public class ControleTIContext : DbContext
+    public class ControleTIContext : IdentityDbContext<IdentityUser>
     {
         public ControleTIContext(DbContextOptions<ControleTIContext> options)
             : base(options)
@@ -16,6 +14,7 @@ namespace ControleTI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<ControleTI.Models.SerialKey>().HasKey(c => new { c.SoftwareId, c.Key });
+            
 
             modelBuilder.Entity<DispositivoSoftware>()
                 .HasOne(d => d.Software)
@@ -31,6 +30,7 @@ namespace ControleTI.Data
                 .HasOne(d => d.SerialKey)
                 .WithMany(sks => sks.DispositivosSoftwares)
                 .HasForeignKey(sk => sk.SerialKeyId);
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<ControleTI.Models.Filial> Filial { get; set; }

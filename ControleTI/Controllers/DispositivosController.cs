@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using ControleTI.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleTI.Controllers
 {
+    [Authorize]
     public class DispositivosController : Controller
     {
         private readonly DispositivoService _dispositivoService;
