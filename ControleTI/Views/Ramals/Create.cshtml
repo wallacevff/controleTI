@@ -1,0 +1,43 @@
+﻿@model ControleTI.Models.Ramal
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Ramal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PontoId" class="control-label"></label>
+                <input asp-for="PontoId" class="form-control" />
+                <span asp-validation-for="PontoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VoicePanelPonto" class="control-label"></label>
+                <input asp-for="VoicePanelPonto" class="form-control" />
+                <span asp-validation-for="VoicePanelPonto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RamalNro" class="control-label"></label>
+                <input asp-for="RamalNro" class="form-control" />
+                <span asp-validation-for="RamalNro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

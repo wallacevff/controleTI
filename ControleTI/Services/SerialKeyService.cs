@@ -67,6 +67,7 @@ namespace ControleTI.Services
                 .Include(obj => obj.Software)
                 .Where(d => d.Key.ToLower().Contains(pesquisa.ToLower())).ToListAsync();
         }
+        
         public async Task<List<SerialKey>> PesquisaSoftware(string pesquisa)
         {
             return await _context.SerialKey

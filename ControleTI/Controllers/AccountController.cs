@@ -55,7 +55,7 @@ namespace CadastroCliente.Controllers
         }
 
      
-        [Authorize]
+       //[Authorize]
         public IActionResult Register()
         {
             return View();
