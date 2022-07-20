@@ -90,5 +90,12 @@ namespace ControleTI.Services
                 .Include(obj => obj.Filial)
                 .ToListAsync();
         }
+
+        public async Task<List<UsuarioLic>> ListarUsuarioLic()
+        {
+            return await _context.UsuarioLic
+                .OrderBy(o => o.Usuario)
+                .ToListAsync();
+        }
     }
 }

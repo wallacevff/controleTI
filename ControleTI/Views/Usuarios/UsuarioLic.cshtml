@@ -1,0 +1,18 @@
+﻿@model UsuarioViewModel
+@{
+    ViewData["Title"] = "Usuários e Licenças";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+
+
+<partial name="_ListarUsuariosLicPartial" model="Model.UsuarioLics" />
+
+
+<script src=~/js/usuarios/PesquisaJSON.js></script>
+<script src=~/js/usuarios/EventNomeUsuario.js></script>
+<script src=~/js/usuarios/EventNomeCompleto.js></script>
+<script src=~/js/usuarios/EventSetor.js></script>
+<script src=~/js/usuarios/EventFilial.js></script>
+<script src=~/js/usuarios/MontaTabelaUsuario.js></script>

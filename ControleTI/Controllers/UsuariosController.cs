@@ -153,5 +153,16 @@ namespace ControleTI.Controllers
             
             return Json(usuarios.Select(o => new { o.Id, o.NomeUsu, o.NomeCompleto, Setor = o.Setor.Nome, Filial =  o.Filial.Nome }));
         }
+
+        public async Task<IActionResult> UsuarioLic()
+        {
+            var viewModel = new UsuarioViewModel
+            {
+                Setores = await _setorService.FindAllAsync(),
+                Filiais = await _filialContext.Filial.ToListAsync(),
+                UsuarioLics = await _usuarioService.ListarUsuarioLic()
+            };
+            return View(viewModel);
+        }
     }
 }

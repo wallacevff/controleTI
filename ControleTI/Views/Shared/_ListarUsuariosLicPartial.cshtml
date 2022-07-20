@@ -1,0 +1,36 @@
+﻿@model IEnumerable<UsuarioLic>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="well">
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dispositivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Software)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody id="tableUsuario">
+        @foreach (var item in Model)
+        {
+        <tr name="Usuario">
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dispositivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Software)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

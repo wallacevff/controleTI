@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ControleTI.Models.RamalViewModel>
+﻿@model IEnumerable<ControleTI.Models.ViewModels.RamalViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PontoId)
+                @Html.DisplayNameFor(model => model.Ramal.PontoId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VoicePanelPonto)
+                @Html.DisplayNameFor(model => model.Ramal.VoicePanelPonto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RamalNro)
+                @Html.DisplayNameFor(model => model.Ramal.RamalNro)
             </th>
             <th></th>
         </tr>
@@ -28,18 +28,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PontoId)
+                @Html.DisplayFor(modelItem => item.Ramal.PontoId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VoicePanelPonto)
+                @Html.DisplayFor(modelItem => item.Ramal.VoicePanelPonto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RamalNro)
+                @Html.DisplayFor(modelItem => item.Ramal.RamalNro)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Ramal.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Ramal.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Ramal.Id">Delete</a>
             </td>
         </tr>
 }

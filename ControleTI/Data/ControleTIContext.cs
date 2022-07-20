@@ -44,6 +44,7 @@ namespace ControleTI.Data
         public DbSet<ControleTI.Models.Status> Status { get; set; }
         public DbSet<ControleTI.Models.PontoRede> PontoRede { get; set; }
         public DbSet<ControleTI.Models.Ramal> Ramal { get; set; }
+        public DbSet<ControleTI.Models.UsuarioLic> UsuarioLic { get; set; }
 
     }
 }

@@ -2,5 +2,6 @@
 {
     public class RamalViewModel
     {
+       public Ramal Ramal { get; set; }
     }
 }
