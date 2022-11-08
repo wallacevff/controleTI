@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using ControleTI.Data;
 using Microsoft.AspNetCore.Identity;
+using ControleTI.Controllers;
 
 namespace ControleTI
 {
@@ -48,7 +49,8 @@ namespace ControleTI
             services.AddTransient<ControleTI.Services.TipoDispositivoService>();
             services.AddTransient<ControleTI.Services.DispositivoSoftwareService>();
             services.AddTransient<ControleTI.Services.StatusService>();
-            //services.AddScoped<SeedingService>();
+            services.AddTransient<ControleTI.Services.EmpresaParceiraService>();
+            services.AddScoped<SeedingService>();
 
 
             services.Configure<IdentityOptions>(options =>
@@ -64,7 +66,7 @@ namespace ControleTI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -75,6 +77,8 @@ namespace ControleTI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
+               
             }
             else
             {
@@ -94,8 +98,6 @@ namespace ControleTI
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            
         }
 
 

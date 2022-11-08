@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleTI.Models
 {
+    [Table("usuariolic")]
     public class UsuarioLic
     {
         public string Id { get; set; }

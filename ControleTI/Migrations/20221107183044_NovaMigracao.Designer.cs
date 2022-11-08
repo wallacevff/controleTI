@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControleTI.Migrations
 {
     [DbContext(typeof(ControleTIContext))]
-    [Migration("20220610191548_Pontos")]
-    partial class Pontos
+    [Migration("20221107183044_NovaMigracao")]
+    partial class NovaMigracao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,26 @@ namespace ControleTI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("ControleTI.Models.Contrato", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Descricao");
+
+                    b.Property<int>("EmpresaParceiraId");
+
+                    b.Property<DateTime>("Fim");
+
+                    b.Property<DateTime>("Inicio");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaParceiraId");
+
+                    b.ToTable("contrato");
+                });
 
             modelBuilder.Entity("ControleTI.Models.Dispositivo", b =>
                 {
@@ -48,7 +68,7 @@ namespace ControleTI.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Dispositivo");
+                    b.ToTable("dispositivo");
                 });
 
             modelBuilder.Entity("ControleTI.Models.DispositivoSoftware", b =>
@@ -72,7 +92,23 @@ namespace ControleTI.Migrations
 
                     b.HasIndex("SoftwareId");
 
-                    b.ToTable("DispositivoSoftware");
+                    b.ToTable("dispositivosoftware");
+                });
+
+            modelBuilder.Entity("ControleTI.Models.EmpresaParceira", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CNPJ");
+
+                    b.Property<string>("NomeFantasia");
+
+                    b.Property<string>("RazaoSocial");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("empresaparceira");
                 });
 
             modelBuilder.Entity("ControleTI.Models.Filial", b =>
@@ -84,47 +120,7 @@ namespace ControleTI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Filial");
-                });
-
-            modelBuilder.Entity("ControleTI.Models.PontoRede", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("FilialId");
-
-                    b.Property<string>("Funcao");
-
-                    b.Property<int>("SetorId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FilialId");
-
-                    b.HasIndex("SetorId");
-
-                    b.ToTable("PontoRede");
-                });
-
-            modelBuilder.Entity("ControleTI.Models.Ramal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("PontoId");
-
-                    b.Property<int?>("PontoRedeId");
-
-                    b.Property<int>("RamalNro");
-
-                    b.Property<int>("VoicePanelPonto");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PontoRedeId");
-
-                    b.ToTable("Ramal");
+                    b.ToTable("filial");
                 });
 
             modelBuilder.Entity("ControleTI.Models.SerialKey", b =>
@@ -146,7 +142,7 @@ namespace ControleTI.Migrations
 
                     b.HasIndex("SoftwareId");
 
-                    b.ToTable("SerialKey");
+                    b.ToTable("serialkey");
                 });
 
             modelBuilder.Entity("ControleTI.Models.Setor", b =>
@@ -158,7 +154,7 @@ namespace ControleTI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Setor");
+                    b.ToTable("setor");
                 });
 
             modelBuilder.Entity("ControleTI.Models.Software", b =>
@@ -170,7 +166,7 @@ namespace ControleTI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Software");
+                    b.ToTable("software");
                 });
 
             modelBuilder.Entity("ControleTI.Models.Status", b =>
@@ -182,7 +178,7 @@ namespace ControleTI.Migrations
 
                     b.HasKey("StatusId");
 
-                    b.ToTable("Status");
+                    b.ToTable("status");
                 });
 
             modelBuilder.Entity("ControleTI.Models.TipoDispositivo", b =>
@@ -194,7 +190,7 @@ namespace ControleTI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoDispositivo");
+                    b.ToTable("tipodispositivo");
                 });
 
             modelBuilder.Entity("ControleTI.Models.Usuario", b =>
@@ -216,7 +212,7 @@ namespace ControleTI.Migrations
 
                     b.HasIndex("SetorId");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -376,6 +372,14 @@ namespace ControleTI.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ControleTI.Models.Contrato", b =>
+                {
+                    b.HasOne("ControleTI.Models.EmpresaParceira", "EmpresaParceira")
+                        .WithMany("Contratos")
+                        .HasForeignKey("EmpresaParceiraId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("ControleTI.Models.Dispositivo", b =>
                 {
                     b.HasOne("ControleTI.Models.Status", "Status")
@@ -409,26 +413,6 @@ namespace ControleTI.Migrations
                         .WithMany("DispositivosSoftwares")
                         .HasForeignKey("SoftwareId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ControleTI.Models.PontoRede", b =>
-                {
-                    b.HasOne("ControleTI.Models.Filial", "Filial")
-                        .WithMany()
-                        .HasForeignKey("FilialId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ControleTI.Models.Setor", "Setor")
-                        .WithMany()
-                        .HasForeignKey("SetorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ControleTI.Models.Ramal", b =>
-                {
-                    b.HasOne("ControleTI.Models.PontoRede", "PontoRede")
-                        .WithMany("Ramais")
-                        .HasForeignKey("PontoRedeId");
                 });
 
             modelBuilder.Entity("ControleTI.Models.SerialKey", b =>

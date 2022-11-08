@@ -42,9 +42,9 @@ namespace ControleTI.Data
         public DbSet<ControleTI.Models.Dispositivo> Dispositivo { get; set; }
         public DbSet<ControleTI.Models.DispositivoSoftware> DispositivoSoftware { get; set; }
         public DbSet<ControleTI.Models.Status> Status { get; set; }
-        public DbSet<ControleTI.Models.PontoRede> PontoRede { get; set; }
-        public DbSet<ControleTI.Models.Ramal> Ramal { get; set; }
-        public DbSet<ControleTI.Models.UsuarioLic> UsuarioLic { get; set; }
-
+        //public DbSet<ControleTI.Models.PontoRede> PontoRede { get; set; }
+        public DbSet<ControleTI.Models.EmpresaParceira> EmpresaParceira { get; set; }
+        public DbSet<ControleTI.Models.Contrato> Contrato { get; set; }
+        //public DbSet<ControleTI.Models.UsuarioLic> UsuarioLic { get; set; }
     }
 }

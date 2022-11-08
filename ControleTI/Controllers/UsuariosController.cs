@@ -160,7 +160,7 @@ namespace ControleTI.Controllers
             {
                 Setores = await _setorService.FindAllAsync(),
                 Filiais = await _filialContext.Filial.ToListAsync(),
-                UsuarioLics = await _usuarioService.ListarUsuarioLic()
+                /* UsuarioLics = await _usuarioService.ListarUsuarioLic() */
             };
             return View(viewModel);
         }

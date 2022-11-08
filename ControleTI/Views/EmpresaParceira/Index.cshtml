@@ -1,0 +1,30 @@
+﻿@model EmpresaParceiraViewModel
+@{
+    ViewData["Title"] = "Empresas Parceiras";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div class="row">
+    <div class="col-md-2 col-lg-2">
+        <a asp-action="Criar" class="btn btn-primary">Adicionar</a>
+        <button type="button" onclick="modalCreate('modalCreate')" class="btn btn-success" data-toggle="modal" data-target="#modalCreate">Cadastrar</button>
+    </div>
+    <partial name="_ListarEmpresasParceiras" model="Model.EmpresasParceiras" />
+    <div id="modalCreateHere">
+
+    </div>
+    
+</div>
+
+<script src=~/js/empresasparceiras/create.js></script>
+<script src=~/js/empresasparceiras/modal.js></script>
+<script src=~/js/empresasparceiras/masks.js></script>
+
+<!--
+<form class="navbar-form navbar-right" asp-controller="Dispositivos" asp-action="PesquisarUsuario" method="get">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Nome do Usuário" name="nomeUsuario" value="@ViewData["nomeUsuario"]">
+        <button type="submit" class="btn glyphicon glyphicon-search"></button>
+    </div>
+</form>
+-->

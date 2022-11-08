@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleTI.Models
 {
+    [Table("dispositivosoftware")]
     public class DispositivoSoftware
     {
         public int Id { get; set; }

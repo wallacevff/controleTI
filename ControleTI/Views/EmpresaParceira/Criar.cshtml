@@ -1,0 +1,24 @@
+﻿@model ControleTI.Models.EmpresaParceira
+@{
+    ViewData["Title"] = "Cadastrar Novo Dispositivo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Criar">
+            <div class="form-group">
+                <label asp-for="NomeFantasia" class="control-label"></label>
+                <input asp-for="NomeFantasia" class="form-control" />
+                <label asp-for="RazaoSocial" class="control-label">RazaoSocial</label>
+                <input asp-for="RazaoSocial" class="form-control" />            
+                <label asp-for="CNPJ" class="control-label">CNPJ</label>
+                <input asp-for="CNPJ" class="form-control" />               
+            </div>
+            <input type="submit" class="btn btn-success" asp-action="Criar" />
+            <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+        </form>
+    </div>
+</div>
+

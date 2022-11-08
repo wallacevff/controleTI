@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleTI.Models
 {
+    [Table("filial")]
     public class Filial
     {
         public int Id { get; set; }

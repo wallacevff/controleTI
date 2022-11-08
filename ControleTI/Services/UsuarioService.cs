@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -90,12 +91,14 @@ namespace ControleTI.Services
                 .Include(obj => obj.Filial)
                 .ToListAsync();
         }
-
+        /*
         public async Task<List<UsuarioLic>> ListarUsuarioLic()
         {
             return await _context.UsuarioLic
                 .OrderBy(o => o.Usuario)
                 .ToListAsync();
         }
+        */
     }
 }
+        

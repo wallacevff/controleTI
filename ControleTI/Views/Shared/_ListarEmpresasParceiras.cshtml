@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EmpresaParceira>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="well">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeFantasia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RazaoSocial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNPJ)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody id="dispositivoTableBody">
+        @foreach (var item in Model)
+        {
+        <tr name="empresaParceira" id="emp-@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeFantasia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RazaoSocial)
+            </td>
+
+            <td name="CNPJ">
+                @Html.DisplayFor(modelItem => item.CNPJ)
+            </td>
+            <td>
+                <a asp-action="Editar" class="btn btn-brown" asp-route-id="@item.Id">Editar</a>
+            </td>
+            <td>
+                <a asp-action="Detalhes" class="btn btn-info" asp-route-id="@item.Id">Detalhes</a>
+            </td>
+            <td>
+                <button type="button" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger" onclick='modalDelete("modalDelete", @item.Id, "@item.NomeFantasia")'>Apagar</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div id="modalHere">
+</div>
+<script src=~/js/empresasparceiras/delete.js></script>
+
+
+
+<s></s>
