@@ -1,16 +1,16 @@
-﻿@model EmpresaParceiraViewModel
+﻿@model ContratoViewModel
 @{
-    ViewData["Title"] = "Empresas Parceiras";
+    ViewData["Title"] = "Contratos";
 }
 
 <h2>@ViewData["Title"]</h2>
 <div class="row">
-    <div class="col-md-2 col-lg-2 empresaPArceira">
+    <div class="col-md-2 col-lg-2 contratos">
        <!--  <a asp-action="Criar" class="btn btn-primary">Adicionar</a> -->
         <button type="button" onclick="modalCreate('modalCreate')" class="btn btn-success" data-toggle="modal" data-target="#modalCreate">Cadastrar</button>
     </div>
     </div>
-    <partial name="_ListarEmpresasParceiras" model="Model.EmpresasParceiras" />
+    <partial name="_ListarContratosPartial" model="Model.Contratos" />
 
     <div id="modalCreateHere">
 
@@ -18,9 +18,9 @@
     
 
 
-<script src=~/js/empresasparceiras/create.js></script>
-<script src=~/js/empresasparceiras/modal.js></script>
-<script src=~/js/empresasparceiras/masks.js></script>
+<script src=~/js/contratos/create.js></script>
+<script src=~/js/contratos/modal.js></script>
+<script src=~/js/contratos/masks.js></script>
 <link rel="stylesheet" href="~/css/empresaPArceira.css">
 <!--
 <form class="navbar-form navbar-right" asp-controller="Dispositivos" asp-action="PesquisarUsuario" method="get">

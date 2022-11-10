@@ -50,6 +50,7 @@ namespace ControleTI
             services.AddTransient<ControleTI.Services.DispositivoSoftwareService>();
             services.AddTransient<ControleTI.Services.StatusService>();
             services.AddTransient<ControleTI.Services.EmpresaParceiraService>();
+            services.AddTransient<ControleTI.Services.ContratoService>();
             services.AddScoped<SeedingService>();
 
 

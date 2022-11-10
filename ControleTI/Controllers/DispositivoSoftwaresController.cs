@@ -86,13 +86,6 @@ namespace ControleTI.Controllers
             return RedirectToAction("Detalhes", "Dispositivos", new { id = dispositivoSoftware.DispositivoId });
         }
 
-
-
-
-
-
-
-
         public async Task<IActionResult> CadastrarIdInstalacao(int id)
         {
             DispositivoSoftware dispositivoSoftware = await _dispositivoSoftwareService.FindByIdAsync(id);

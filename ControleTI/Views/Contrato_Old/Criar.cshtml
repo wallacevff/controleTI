@@ -1,0 +1,24 @@
+﻿@model ControleTI.Models.ViewModels.ContratoViewModel
+@{
+    ViewData["Title"] = "Cadastrar Novo Contrato";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Criar">
+            <div class="form-group">
+                <label asp-for="Contrato.Id" class="control-label"></label>
+                <input asp-for="Contrato.Descricao" class="form-control" />
+                <label asp-for="Contrato.Inicio" class="control-label"></label>
+                <input asp-for="Contrato.Inicio" class="form-control" />            
+                <label asp-for="Contrato.Fim" class="control-label"></label>
+                <input asp-for="Contrato.Fim" class="form-control" />               
+            </div>
+            <input type="submit" class="btn btn-success" asp-action="Criar" />
+            <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+        </form>
+    </div>
+</div>
+

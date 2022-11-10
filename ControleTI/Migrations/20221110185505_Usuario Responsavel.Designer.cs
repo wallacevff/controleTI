@@ -3,14 +3,16 @@ using System;
 using ControleTI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ControleTI.Migrations
 {
     [DbContext(typeof(ControleTIContext))]
-    partial class ControleTIContextModelSnapshot : ModelSnapshot
+    [Migration("20221110185505_Usuario Responsavel")]
+    partial class UsuarioResponsavel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +35,6 @@ namespace ControleTI.Migrations
                     b.Property<int>("UsuRespId");
 
                     b.Property<int?>("UsuarioId");
-
-                    b.Property<decimal>("Valor");
 
                     b.HasKey("Id");
 

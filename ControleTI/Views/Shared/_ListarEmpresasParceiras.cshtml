@@ -24,36 +24,40 @@
         @foreach (var item in Model)
         {
         <tr name="empresaParceira" id="emp-@item.Id">
-            <td>
+            <td id="Id-@item.Id">
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td>
+            <td id="NomeFantasia-@item.Id">
                 @Html.DisplayFor(modelItem => item.NomeFantasia)
             </td>
-            <td>
+            <td id="RazaoSocial-@item.Id">
                 @Html.DisplayFor(modelItem => item.RazaoSocial)
             </td>
 
-            <td name="CNPJ">
+            <td name="CNPJ" id="CNPJ-@item.Id">
                 @Html.DisplayFor(modelItem => item.CNPJ)
             </td>
             <td>
-                <a asp-action="Editar" class="btn btn-brown" asp-route-id="@item.Id">Editar</a>
+                <button type="button" data-toggle="modal" data-target="#modalEdit" class="btn btn-brown" onclick='modalEdit("modalEdit", @item.Id)'>Editar</button>
             </td>
             <td>
                 <a asp-action="Detalhes" class="btn btn-info" asp-route-id="@item.Id">Detalhes</a>
             </td>
             <td>
-                <button type="button" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger" onclick='modalDelete("modalDelete", @item.Id, "@item.NomeFantasia")'>Apagar</button>
+                <button type="button" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger" onclick='modalDelete("modalDelete", @item.Id)'>Apagar</button>
             </td>
         </tr>
         }
     </tbody>
 </table>
+@Html.AntiForgeryToken()
 <div id="modalHere">
 </div>
+<div id="modalEditHere">
+</div>
 <script src=~/js/empresasparceiras/delete.js></script>
-
+<script src=~/js/empresasparceiras/edit.js></script>
+<script src=~/js/empresasparceiras/modal.js></script>
 
 
 <s></s>

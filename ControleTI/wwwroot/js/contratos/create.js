@@ -11,7 +11,7 @@ function modalCreate(idModal) {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="${idModal}Label">Cadastrar Empresa</h5>
+                <h5 class="modal-title" id="${idModal}Label">Cadastrar Contrato</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -22,12 +22,13 @@ function modalCreate(idModal) {
                     <div class="col-md-12">
                         
                             <div class="form-group">
-                                <label asp-for="NomeFantasia" class="control-label">Nome Fantasia</label>
-                                <input name="NomeFantasia" id="NomeFantasia" class="form-control" required />
-                                <label asp-for="RazaoSocial" class="control-label">Razão Social</label>
-                                <input name="RazaoSocial" id="RazaoSocial" class="form-control" required />
-                                <label asp-for="CNPJ" class="control-label">CNPJ</label>
-                                <input name="CNPJ" id="CNPJ" inputmode=numeric class="form-control" required />
+                                <label class="control-label">Descrição do Contrato</label>
+                                <input name="Descricao" id="Descricao" class="form-control" />
+                                <label class="control-label">Início</label>
+                                <input type="date" name="Inicio" id="Inicio" class="form-control" />
+                                <label lass="control-label">Fim</label>
+                                <input type="date" name="Fim" id="Fim" inputmode=date class="form-control" />
+                                <br>
                                 <br>
                                 <button type="button" onclick='CadastrarEmpresaParceira("${idModal}")' data-dismiss="modal" class="btn btn-success">Criar</button>
                                 <button class="btn btn-danger" data-dismiss="modal"
@@ -45,32 +46,22 @@ function modalCreate(idModal) {
     );
 
     div.appendChild(modal);
-    var mod = document.querySelector("#CNPJ");
-    if (mod) {
-        modal.addEventListener("input",
-            function () {
-                let cnpj = mod.value
-                cnpj = cnpjFormat(cnpj);
-                mod.value = cnpj;
-            }
-        );
-    }
 }
 
 function CadastrarEmpresaParceira(idModal) {
     
     var token = document.querySelector("input[name=__RequestVerificationToken]");
     var modal = document.querySelector(`#${idModal}`);
-    var NomeFantasia = modal.querySelector('#NomeFantasia');
-    var RazaoSocial = modal.querySelector('#RazaoSocial');
-    var CNPJ = modal.querySelector('#CNPJ');
+    var Descricao = modal.querySelector('#Descricao');
+    var Inicio = modal.querySelector('#Inicio');
+    var Fim = modal.querySelector('#Fim');
 
     const url = "/EmpresaParceira/Create";
     let form = new FormData();
     form.append("__RequestVerificationToken", token.value);
-    form.append("NomeFantasia", NomeFantasia.value);
-    form.append("RazaoSocial", RazaoSocial.value);
-    form.append("CNPJ", CNPJ.value.replace(".","").replace("/","").replace("-","").replace(".",""));
+    form.append("Descricao", Descricao.value);
+    form.append("Inicio", Inicio.value);
+    form.append("Fim", Fim.value);
     fetch(url, {
         body: form,
         method: "POST"

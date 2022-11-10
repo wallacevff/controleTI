@@ -7,44 +7,48 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ControleTI.Services
 {
-    public class EmpresaParceiraService
+    public class ContratoService
     {
         private readonly ControleTI.Data.ControleTIContext _context;
 
-        public EmpresaParceiraService(ControleTI.Data.ControleTIContext context)
+        public ContratoService(ControleTI.Data.ControleTIContext context)
         {
             _context = context;
         }
 
-        public async Task<EmpresaParceira> AddEmpresaParceira(EmpresaParceira empresaParceira)
+        public async Task<Contrato> AddContrato(Contrato contrato)
         {
-            var emp = await _context
-                .EmpresaParceira
-                .AddAsync(empresaParceira);
+            var con = await _context
+                .Contrato
+                .AddAsync(contrato);
             _context.SaveChanges();
             
-            return emp.Entity;
+            return con.Entity;
         }
 
-        public async Task<IEnumerable<EmpresaParceira>> ListEmpresaParceira()
+        public async Task<IEnumerable<Contrato>> ListContrato()
         {
             return await _context
-                .EmpresaParceira
+                .Contrato
+                .Include(o => o.EmpresaParceira)
                 .ToListAsync();
         }
 
-        public async Task DeleteEmpresaParceira(EmpresaParceira empresaParceira)
+        public async Task DeleteContrato(Contrato contrato)
         {
-            _context.Remove(empresaParceira);
+            _context.Remove(contrato);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<EmpresaParceira> FindEmpresaParceiraById(int id)
+        public async Task<Contrato> FindContratoById(int id)
         {
-            return await _context.EmpresaParceira.FindAsync(id);
+            return await _context.Contrato
+                .Include(o => o.EmpresaParceira)
+                .FirstOrDefaultAsync(o => o.Id == id)
+                ;
         }
 
-        public async Task UpdateEmpresaParceira(EmpresaParceira e)
+        public async Task UpdateContrato(Contrato e)
         {
             bool temAlgum = await _context.EmpresaParceira.AnyAsync(obj => obj.Id == e.Id);
             if (!temAlgum)

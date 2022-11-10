@@ -50,5 +50,14 @@ namespace ControleTI.Controllers
             empresaParceira = await _empresaParceiraService.FindEmpresaParceiraById(id);
             await _empresaParceiraService.DeleteEmpresaParceira(empresaParceira);
         }
+
+        [HttpPut]
+       
+        public async Task<IActionResult> Edit(EmpresaParceira empresaParceira)
+        {
+            await _empresaParceiraService.UpdateEmpresaParceira(empresaParceira);
+            return Json(new { Status = "Update Realizado", Erro= "NULL" });
+           
+        }
     }
 }

@@ -1,0 +1,139 @@
+﻿@model Dispositivo
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h2>@ViewData["Title"]</h2>
+@Html.AntiForgeryToken()
+<div>
+    <h4>Dispositivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDispositivo.Tipo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoDispositivo.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.StatusNome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status.StatusNome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MacAdress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MacAdress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.NomeUsu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.NomeUsu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Processador)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Processador)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Memoria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Memoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hd)
+        </dd>
+    </dl>
+    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
+    <a asp-controller="DispositivoSoftwares" asp-action="CadastrarSoftware" asp-route-dispositivoId="@Model.Id" class="btn btn-warning">Adicionar Software</a>
+    <a asp-action="index" class="btn btn-primary">Voltar</a>
+    <br />
+    <br />
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="well">
+                <th>
+                    Software
+                </th>
+                <th>
+                    Key
+                </th>
+                <th>
+                    Id de Instalação
+                </th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DispositivosSoftwares)
+            {
+                <tr id="soft-@item.Id">
+                    <td>
+                        @Html.DisplayFor(usu => item.Software.Nome)
+                    </td>
+                    <td>
+
+                        @if (item.SerialKeyId == null)
+                        {
+
+                            <a asp-controller="DispositivoSoftwares" asp-action="CadastrarSerialKey" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar Key</a>
+
+                        }
+
+                        @Html.DisplayFor(modelItem => item.SerialKey.Key)
+
+
+                    </td>
+                    <td>
+                        @if (item.SerialKeyId != null)
+                        {
+                            @if (item.IdInstalacao == null)
+                            {
+                                <a asp-controller="DispositivoSoftwares" asp-action="CadastrarIdInstalacao" class="btn btn-primary" asp-route-id="@item.Id">Cadastrar</a>
+                            }
+
+                            @Html.DisplayFor(modelItem => item.IdInstalacao)
+                        }
+                    </td>
+                    <td>
+
+                        <button type="button" class="btn btn-danger" onclick="modalDelete(@item.Id, '@item.Software.Nome')" data-toggle="modal" data-target="#modalApagar">
+                            Apagar
+                        </button>
+                        <partial name="_ApagarSoftwarePartial" model="item"/>
+
+                        <!-- <a asp-controller="DispositivoSoftwares"  asp-action="Apagar" class="btn btn-danger" asp-route-id="@item.Id">Del</a> -->
+                </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src=~/js/dispositivos/ModalDelete.js></script>
+    
+</div>

@@ -1,0 +1,32 @@
+﻿@model ContratoViewModel
+@{
+    ViewData["Title"] = "Cadastrar Novo Contrato";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Criar">
+            <div class="form-group">
+                <input type="hidden" asp-for="Contrato.Id" />
+                <label asp-for="Contrato.Descricao" class="control-label"></label>
+                <input asp-for="Contrato.Descricao" class="form-control" />
+                <label asp-for="Contrato.Valor" class="control-label"></label>
+                <input asp-for="Contrato.Valor" class="form-control" />
+                <label asp-for="Contrato.Inicio" class="control-label"></label>
+                <input type="date" asp-for="Contrato.Inicio" class="form-control" />
+                <label asp-for="Contrato.Fim" class="control-label"></label>
+                <input type="date" asp-for="Contrato.Fim" class="form-control" />
+                <label asp-for="EmpresasParceiras" class="control-label">Empresa Parceira</label>
+                <select asp-for="Contrato.EmpresaParceiraId" asp-items="@(new SelectList(Model.EmpresasParceiras,"Id","NomeFantasia"))" class="form-control"></select>
+                <span></span>
+                <label class="control-label">Usuário Responsável</label>
+                <select asp-for="Contrato.UsuRespId" asp-items="@(new SelectList(Model.Usuarios,"Id","NomeUsu"))" class="form-control"></select>
+            </div>
+            <input type="submit" class="btn btn-success" asp-action="Criar" />
+            <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+        </form>
+    </div>
+</div>
+
