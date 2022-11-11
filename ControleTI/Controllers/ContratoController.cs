@@ -3,8 +3,6 @@ using ControleTI.Models;
 using ControleTI.Services;
 using System.Threading.Tasks;
 using ControleTI.Models.ViewModels;
-using System.Collections.Generic;
-using System;
 
 namespace ControleTI.Controllers
 {
@@ -57,12 +55,26 @@ namespace ControleTI.Controllers
             return Json(c);
         }
 
+        
+        public async Task<IActionResult> Excluir(int id)
+        {
+            ContratoViewModel contratoViewModel = new ContratoViewModel(
+                await _empresaParceiraService.ListEmpresaParceira(),
+                await _contratoService.FindContratoById(id),
+                await _usuarioService.FindAllAsync()
+            );
+
+            return View(contratoViewModel);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task Delete(int id, Contrato contrato)
+        public async Task<IActionResult> Delete(Contrato contrato)
         {
-            contrato = await _contratoService.FindContratoById(id);
+            //Contrato contrato = await _contratoService.FindContratoById(id);
             await _contratoService.DeleteContrato(contrato);
+            return RedirectToAction(nameof(Index));
         }
 
       
@@ -79,6 +91,19 @@ namespace ControleTI.Controllers
                     await _usuarioService.FindAllAsync()
                 );
             return View(contratoViewModel);
+
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(int? id, Contrato contrato)
+        {
+            if (id != contrato.Id)
+            {
+                return NotFound();
+            }
+            await _contratoService.UpdateContrato(contrato);
+            return RedirectToAction(nameof(Index));
 
         }
     }

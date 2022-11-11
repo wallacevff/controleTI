@@ -1,25 +1,28 @@
-﻿@model IEnumerable<Contrato>
+﻿@model ContratoViewModel
 <table class="table table-striped table-hover">
     <thead>
         <tr class="well">
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Contrato.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                @Html.DisplayNameFor(model => model.Contrato.Descricao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Valor)
+                @Html.DisplayNameFor(model => model.Contrato.Valor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inicio.Date)
+                @Html.DisplayNameFor(model => model.Contrato.Inicio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fim.Date)
+                @Html.DisplayNameFor(model => model.Contrato.Fim)
             </th>
 
             <th>
                 Empresa Parceira
+            </th>
+            <th>
+                Responsável
             </th>
             <th></th>
             <th></th>
@@ -28,9 +31,9 @@
         </tr>
     </thead>
     <tbody id="dispositivoTableBody">
-        @foreach (var item in Model)
+        @foreach (var item in Model.Contratos)
         {
-        <tr name="dispositivo">
+        <tr name="contratos">
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
@@ -41,15 +44,18 @@
                 @Html.DisplayFor(modelItem => item.Valor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Inicio.Date)
+                @item.Inicio.ToString("dd/MM/yyyy")
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Fim.Date)
+                @item.Fim.ToString("dd/MM/yyyy")
             </td>
 
             <td>
                 @Html.DisplayFor(modelItem => item.EmpresaParceira.NomeFantasia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.NomeUsu)
             </td>
 
             <td>

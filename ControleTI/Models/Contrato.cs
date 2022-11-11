@@ -16,7 +16,7 @@ namespace ControleTI.Models
         public DateTime Fim { get; set; }
         public int EmpresaParceiraId { get; set; }
         public EmpresaParceira EmpresaParceira { get; set; }
-        public int UsuRespId { get; set; }
+        public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
     }
 }

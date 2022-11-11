@@ -31,6 +31,7 @@ namespace ControleTI.Services
             return await _context
                 .Contrato
                 .Include(o => o.EmpresaParceira)
+                .Include(o => o.Usuario)
                 .ToListAsync();
         }
 
@@ -44,13 +45,14 @@ namespace ControleTI.Services
         {
             return await _context.Contrato
                 .Include(o => o.EmpresaParceira)
+                .Include(o => o.Usuario)
                 .FirstOrDefaultAsync(o => o.Id == id)
                 ;
         }
 
         public async Task UpdateContrato(Contrato e)
         {
-            bool temAlgum = await _context.EmpresaParceira.AnyAsync(obj => obj.Id == e.Id);
+            bool temAlgum = await _context.Contrato.AnyAsync(obj => obj.Id == e.Id);
             if (!temAlgum)
             {
                 return;

@@ -19,9 +19,10 @@
                 <input type="date" asp-for="Contrato.Fim" class="form-control" />
                 <label asp-for="EmpresasParceiras" class="control-label">Empresa Parceira</label>
                 <select asp-for="Contrato.EmpresaParceiraId" asp-items="@(new SelectList(Model.EmpresasParceiras,"Id","NomeFantasia"))" class="form-control"></select>
+
                 <span></span>
                 <label class="control-label">Usuário Responsável</label>
-                <select asp-for="Contrato.UsuRespId" asp-items="@(new SelectList(Model.Usuarios,"Id","NomeUsu"))" class="form-control"></select>
+                <select asp-for="Contrato.UsuarioId" asp-items="@(new SelectList(Model.Usuarios,"Id","NomeUsu"))" class="form-control"></select>
             </div>
             <input type="submit" class="btn btn-success" asp-action="Criar" />
             <a asp-action="Index" class="btn btn-danger">Cancelar</a>

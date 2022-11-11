@@ -3,8 +3,7 @@ using ControleTI.Models;
 using ControleTI.Services;
 using System.Threading.Tasks;
 using ControleTI.Models.ViewModels;
-using System.Collections.Generic;
-using System;
+
 
 namespace ControleTI.Controllers
 {
@@ -52,7 +51,7 @@ namespace ControleTI.Controllers
         }
 
         [HttpPut]
-       
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EmpresaParceira empresaParceira)
         {
             await _empresaParceiraService.UpdateEmpresaParceira(empresaParceira);

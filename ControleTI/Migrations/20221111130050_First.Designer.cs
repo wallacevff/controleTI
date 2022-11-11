@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControleTI.Migrations
 {
     [DbContext(typeof(ControleTIContext))]
-    [Migration("20221110185505_Usuario Responsavel")]
-    partial class UsuarioResponsavel
+    [Migration("20221111130050_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,9 @@ namespace ControleTI.Migrations
 
                     b.Property<DateTime>("Inicio");
 
-                    b.Property<int>("UsuRespId");
+                    b.Property<int>("UsuarioId");
 
-                    b.Property<int?>("UsuarioId");
+                    b.Property<decimal>("Valor");
 
                     b.HasKey("Id");
 
@@ -387,7 +387,8 @@ namespace ControleTI.Migrations
 
                     b.HasOne("ControleTI.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ControleTI.Models.Dispositivo", b =>

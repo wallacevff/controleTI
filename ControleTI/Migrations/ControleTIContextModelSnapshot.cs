@@ -30,9 +30,7 @@ namespace ControleTI.Migrations
 
                     b.Property<DateTime>("Inicio");
 
-                    b.Property<int>("UsuRespId");
-
-                    b.Property<int?>("UsuarioId");
+                    b.Property<int>("UsuarioId");
 
                     b.Property<decimal>("Valor");
 
@@ -387,7 +385,8 @@ namespace ControleTI.Migrations
 
                     b.HasOne("ControleTI.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ControleTI.Models.Dispositivo", b =>

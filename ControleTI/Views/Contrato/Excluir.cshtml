@@ -1,4 +1,4 @@
-﻿@model Dispositivo
+﻿@model ContratoViewModel
 @{
     ViewData["Title"] = "Excluir";
 }
@@ -8,28 +8,50 @@
 <h3>Deseja Exluir?</h3>
 
 <div>
-    <h4>Dispositivo</h4>
+    <h4>Contrato</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.Contrato.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.Contrato.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Contrato.Descricao)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Nome)
+            @Html.DisplayFor(model => model.Contrato.Descricao)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrato.Inicio)
+        </dt>
         <dd>
-            @Html.DisplayFor(model => model.Usuario.NomeUsu)
+            @Model.Contrato.Inicio.ToString("dd/MM/yyyy")
         </dd>
+         <dt>
+            @Html.DisplayNameFor(model => model.Contrato.Fim)
+        </dt>
+        <dd>
+            @Model.Contrato.Fim.ToString("dd/MM/yyyy")
+        </dd>
+         <dt>
+            Empresa
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contrato.EmpresaParceira.NomeFantasia)
+        </dd>
+        <dt>
+            Responsável
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contrato.Usuario.NomeUsu)
+        </dd>
+
     </dl>
-    <form asp-action="Excluir">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" class="btn btn-danger" asp-action="Excluir" value="Sim" />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Contrato.Id" />
+        <input type="submit" class="btn btn-danger" value="Sim" />
         <a asp-action="index" class="btn btn-success">Não</a>
     </form>
 </div>

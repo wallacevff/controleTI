@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ControleTI.Migrations
 {
-    public partial class NovaMigracao : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -234,28 +234,6 @@ namespace ControleTI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "contrato",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Descricao = table.Column<string>(nullable: true),
-                    Inicio = table.Column<DateTime>(nullable: false),
-                    Fim = table.Column<DateTime>(nullable: false),
-                    EmpresaParceiraId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_contrato", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_contrato_empresaparceira_EmpresaParceiraId",
-                        column: x => x.EmpresaParceiraId,
-                        principalTable: "empresaparceira",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "usuario",
                 columns: table => new
                 {
@@ -302,6 +280,36 @@ namespace ControleTI.Migrations
                         name: "FK_serialkey_software_SoftwareId",
                         column: x => x.SoftwareId,
                         principalTable: "software",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "contrato",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Descricao = table.Column<string>(nullable: true),
+                    Valor = table.Column<decimal>(nullable: false),
+                    Inicio = table.Column<DateTime>(nullable: false),
+                    Fim = table.Column<DateTime>(nullable: false),
+                    EmpresaParceiraId = table.Column<int>(nullable: false),
+                    UsuarioId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_contrato", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_contrato_empresaparceira_EmpresaParceiraId",
+                        column: x => x.EmpresaParceiraId,
+                        principalTable: "empresaparceira",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_contrato_usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -419,6 +427,11 @@ namespace ControleTI.Migrations
                 name: "IX_contrato_EmpresaParceiraId",
                 table: "contrato",
                 column: "EmpresaParceiraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_contrato_UsuarioId",
+                table: "contrato",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_dispositivo_StatusId",
